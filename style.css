@@ -1,0 +1,5283 @@
+@font-face {
+    font-family: "Roman Antique";
+    src: url("fonts/RomanAntique.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Aquifer";
+    src: url("fonts/Aquifer.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Garamond";
+    src: url("fonts/GARA.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: black;
+    color: #e5dfc9;
+    overflow: hidden;
+}
+
+.start-screen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("images/start-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.start-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.logo-image {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    width: 42vw;
+    max-width: 760px;
+    min-width: 420px;
+    height: auto;
+
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.65));
+
+}
+
+
+.enter-text {
+    position: absolute;
+    left: 50%;
+    bottom: 17%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    margin: 0;
+    font-family: "Roman Antique", serif;
+    font-size: 40px;
+    color: #bbb297;
+
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+
+    animation: blink 2.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.15;
+    }
+}
+
+
+.main-menu {
+    position: fixed;
+    inset: 0;
+
+    background-image: url("images/menu-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: #bbb297;
+    overflow: hidden;
+
+    display: none;
+}
+
+
+.menu-logo {
+    position: absolute;
+
+    top: 6%;
+    right: 7%;
+
+    width: 25vw;
+    max-width: 480px;
+    height: auto;
+
+    z-index: 2;
+}
+
+.menu {
+    position: absolute;
+
+    top: 35%;
+    left: 14%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 46px;
+
+    z-index: 2;
+}
+
+.menu a {
+    color: #bbb297;
+    text-decoration: none;
+
+    font-family: "Roman Antique", serif;
+    font-size: 40px;
+
+    display: block;
+    width: fit-content;
+
+    transform-origin: left center;
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+.menu a:hover {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.75),
+        0 0 12px rgba(210, 165, 90, 0.45);
+
+    transform: scale(1.065);
+}
+
+.fade-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+
+    z-index: 999;
+
+    transition: opacity 0.6s ease;
+}
+
+.fade-overlay.active {
+    opacity: 1;
+}
+
+
+
+
+.about-screen {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    background: #382727;
+    color: #d7d4ca;
+
+    overflow: hidden;
+}
+
+/* --- back arrow --- */
+
+.back-control {
+    position: absolute;
+
+    top: 4.5%;
+    left: 4.5%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #b9b3aa;
+    cursor: pointer;
+
+    opacity: 0.9;
+    z-index: 3;
+
+    transition:
+        opacity 0.18s ease,
+        filter 0.18s ease;
+}
+
+.back-control img {
+    width: 26px;
+    height: 26px;
+
+    object-fit: contain;
+
+    transition: transform 0.18s ease;
+}
+
+.back-control span {
+    font-family: "Aquifer", serif;
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+.back-control:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(240, 210, 140, 0.28));
+}
+
+.back-control:hover img {
+    transform: translateX(-2px);
+}
+
+/* --- main about block --- */
+
+.about-content {
+    position: absolute;
+
+    top: 21.5%;
+    left: 13.3%;
+
+    width: 73%;
+    max-width: 1080px;
+}
+
+.about-content h2 {
+    margin: 0 0 46px 0;
+
+    font-family: "Roman Antique", serif;
+    font-size: 40px;
+    font-weight: normal;
+    line-height: 1;
+
+    color: #bbb297;
+}
+
+.about-text {
+    margin: 0;
+
+    font-family: "Garamond", serif;
+    font-size: 19px;
+    line-height: 1.5;
+
+    color: #d7d4ca;
+}
+
+/* --- support block --- */
+
+.support-area {
+    position: absolute;
+
+    left: 13.1%;
+    bottom: 11.5%;
+
+    font-family: "Garamond", serif;
+    color: #d7d4ca;
+}
+
+.support-area p {
+    margin: 0 0 16px 0;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.support-button {
+    padding: 10px 18px;
+
+    border: 1px solid rgba(187, 178, 151, 0.55);
+    background: transparent;
+
+    font-family: "Garamond", serif;
+    font-size: 17px;
+    line-height: 1;
+
+    color: #bbb297;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+.support-button:hover {
+    color: #f0dfad;
+    border-color: rgba(240, 223, 173, 0.8);
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.35),
+        0 0 10px rgba(210, 165, 90, 0.18);
+
+    transform: scale(1.03);
+}
+
+
+
+
+
+.menu-description {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8.5%;
+    transform: translateX(-50%);
+
+    margin: 0;
+
+    font-family: "Aquifer", serif;
+    font-size: 24px;
+    font-weight: normal;
+
+    color: #d7d4ca;
+
+    text-align: center;
+    white-space: nowrap;
+
+    opacity: 0;
+
+    text-shadow:
+        0 0 4px rgba(230, 230, 220, 0.22),
+        0 2px 5px rgba(0, 0, 0, 0.85);
+
+    transition: opacity 0.18s ease;
+
+    pointer-events: none;
+    z-index: 2;
+}
+
+.menu-description.visible {
+    opacity: 0.9;
+}
+
+
+
+
+/* =========================
+   MUSIC SCREEN
+   ========================= */
+
+.music-screen {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    background: #503e37;
+    color: #d7d4ca;
+
+    overflow: hidden;
+}
+
+
+/* --- heading + year filters --- */
+
+.music-heading {
+    position: absolute;
+
+    top: 21%;
+    left: 13.3%;
+
+    width: 73%;
+}
+
+.music-heading h2 {
+    margin: 0;
+
+    font-family: "Roman Antique", serif;
+    font-size: 40px;
+    font-weight: normal;
+    line-height: 1;
+
+    color: #bbb297;
+}
+
+.music-filters {
+    position: absolute;
+
+    top: 4px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 72px;
+
+    margin-left: 0;
+}
+
+.music-filter {
+    padding: 4px 10px;
+
+    border: 1px solid transparent;
+    background: transparent;
+
+    font-family: "Garamond", serif;
+    font-size: 19px;
+
+    color: #aaa18e;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        text-shadow 0.18s ease;
+}
+
+.music-filter:hover {
+    color: #e1d7bb;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.35);
+}
+
+
+.music-filter.active {
+    color: #e1d7bb;
+
+    border-color:
+        rgba(187, 178, 151, 0.65);
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.30);
+}
+
+/* --- carousel --- */
+
+.music-carousel {
+    position: absolute;
+
+    top: 31%;
+    left: 50%;
+
+    width: 680px;
+    height: 360px;
+
+    transform: translateX(-50%);
+}
+
+.cover-stage {
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 540px;
+    height: 340px;
+
+    transform: translateX(-50%);
+}
+
+.music-cover {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 335px;
+    height: 335px;
+
+    margin-left: -167.5px;
+    margin-top: -167.5px;
+
+    object-fit: cover;
+
+    transform-origin: center;
+
+    transition:
+        transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1),
+        opacity 0.65s ease,
+        filter 0.65s ease;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* central cover */
+
+.music-cover-current {
+    z-index: 3;
+
+    transform:
+        translateX(0)
+        scale(1);
+
+    opacity: 1;
+    filter: brightness(1);
+}
+
+
+/* previous cover */
+
+.music-cover-prev {
+    z-index: 2;
+
+    transform:
+        translateX(-140px)
+        scale(0.76);
+
+    opacity: 0.85;
+    filter: brightness(0.78);
+}
+
+
+/* next cover */
+
+.music-cover-next {
+    z-index: 2;
+
+    transform:
+        translateX(140px)
+        scale(0.76);
+
+    opacity: 0.85;
+    filter: brightness(0.78);
+}
+
+
+.music-cover-far-prev {
+    z-index: 1;
+
+    transform:
+        translateX(-280px)
+        scale(0.62);
+
+    opacity: 0;
+    filter: brightness(0.65);
+}
+
+.music-cover-far-next {
+    z-index: 1;
+
+    transform:
+        translateX(280px)
+        scale(0.62);
+
+    opacity: 0;
+    filter: brightness(0.65);
+}
+
+/* carousel arrows */
+
+.carousel-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    padding: 10px;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transform: translateY(-50%);
+
+    opacity: 0.8;
+
+    transition:
+        opacity 0.18s ease,
+        filter 0.18s ease;
+}
+
+.carousel-arrow img {
+    width: 30px;
+    height: 30px;
+
+    object-fit: contain;
+}
+
+.carousel-arrow-left {
+    left: 0;
+}
+
+.carousel-arrow-right {
+    right: 0;
+}
+
+.carousel-arrow-right img {
+    transform: rotate(180deg);
+}
+
+.carousel-arrow:hover {
+    opacity: 1;
+
+    filter:
+        drop-shadow(0 0 5px rgba(240, 210, 140, 0.35));
+}
+
+
+/* --- release information --- */
+
+.release-info {
+    position: absolute;
+
+    top: 72%;
+    left: 50%;
+
+    width: 700px;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+}
+
+.release-title {
+    margin: 0;
+
+    font-family: "Garamond", serif;
+    font-size: 19px;
+
+    color: #d7d4ca;
+}
+
+.release-artist {
+    margin: 4px 0 0 0;
+
+    font-family: "Garamond", serif;
+    font-size: 18px;
+
+    color: #d7d4ca;
+}
+
+
+/* Listen + More */
+
+.release-actions {
+    display: flex;
+    justify-content: center;
+    gap: 78px;
+
+    margin-top: 36px;
+}
+
+.release-button {
+    padding: 3px 11px;
+
+    border: 1px solid rgba(187, 178, 151, 0.55);
+    background: transparent;
+
+    font-family: "Garamond", serif;
+    font-size: 19px;
+
+    color: #bbb297;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+.release-button:hover {
+    color: #f0dfad;
+
+    border-color: rgba(240, 223, 173, 0.8);
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.45);
+
+    transform: scale(1.04);
+}
+
+
+
+.cover-stage.is-moving-next .music-cover-far-prev {
+    transform:
+        translateX(-420px)
+        scale(0.5);
+
+    opacity: 0;
+}
+
+.cover-stage.is-moving-next .music-cover-prev {
+    transform:
+        translateX(-280px)
+        scale(0.62);
+
+    opacity: 0;
+    filter: brightness(0.65);
+}
+
+.cover-stage.is-moving-next .music-cover-current {
+    transform:
+        translateX(-140px)
+        scale(0.76);
+
+    opacity: 0.85;
+    filter: brightness(0.78);
+
+    z-index: 2;
+}
+
+.cover-stage.is-moving-next .music-cover-next {
+    transform:
+        translateX(0)
+        scale(1);
+
+    opacity: 1;
+    filter: brightness(1);
+
+    z-index: 4;
+}
+
+.cover-stage.is-moving-next .music-cover-far-next {
+    transform:
+        translateX(140px)
+        scale(0.76);
+
+    opacity: 0.85;
+    filter: brightness(0.78);
+
+    z-index: 2;
+}
+
+
+
+.cover-stage.is-moving-prev .music-cover-far-next {
+    transform:
+        translateX(420px)
+        scale(0.5);
+
+    opacity: 0;
+}
+
+.cover-stage.is-moving-prev .music-cover-next {
+    transform:
+        translateX(280px)
+        scale(0.62);
+
+    opacity: 0;
+    filter: brightness(0.65);
+}
+
+.cover-stage.is-moving-prev .music-cover-current {
+    transform:
+        translateX(140px)
+        scale(0.76);
+
+    opacity: 0.85;
+    filter: brightness(0.78);
+
+    z-index: 2;
+}
+
+.cover-stage.is-moving-prev .music-cover-prev {
+    transform:
+        translateX(0)
+        scale(1);
+
+    opacity: 1;
+    filter: brightness(1);
+
+    z-index: 4;
+}
+
+.cover-stage.is-moving-prev .music-cover-far-prev {
+    transform:
+        translateX(-140px)
+        scale(0.76);
+
+    opacity: 0.85;
+    filter: brightness(0.78);
+
+    z-index: 2;
+}
+
+
+.cover-stage.no-transition .music-cover {
+    transition: none !important;
+}
+
+
+.carousel-arrow.is-disabled,
+.carousel-arrow:disabled {
+    opacity: 0.22 !important;
+    cursor: default;
+    filter: none !important;
+}
+
+
+
+
+/* =========================
+   MUSIC - MORE WINDOW
+   ========================= */
+
+.music-more-overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(20, 12, 10, 0.38);
+
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    z-index: 50;
+
+    transition:
+        opacity 0.28s ease,
+        visibility 0.28s ease;
+}
+
+.music-more-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+.music-more-window {
+    position: relative;
+
+    width: min(86vw, 1320px);
+    height: min(82vh, 760px);
+
+    display: grid;
+    grid-template-columns: 48% 52%;
+
+    background: #0d0a08;
+
+    overflow: hidden;
+
+    opacity: 0;
+    transform:
+        translateY(7px)
+        scale(0.99);
+
+    transition:
+        opacity 0.32s ease,
+        transform 0.32s ease;
+}
+
+.music-more-overlay.open .music-more-window {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* X */
+
+.music-more-close {
+    position: absolute;
+
+    top: 18px;
+    right: 22px;
+
+    padding: 5px;
+
+    border: none;
+    background: transparent;
+
+    font-family: "Roman Antique", serif;
+    font-size: 28px;
+
+    color: #bbb297;
+
+    cursor: pointer;
+    z-index: 5;
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+.music-more-close:hover {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 6px rgba(240, 210, 140, 0.45);
+
+    transform: scale(1.07);
+}
+
+
+/* COVER */
+
+.music-more-cover-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 38px;
+}
+
+.music-more-cover {
+    width: min(36vw, 510px);
+    max-height: 64vh;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    user-select: none;
+}
+
+
+/* RIGHT INFORMATION COLUMN */
+
+.music-more-details {
+    height: 100%;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    padding:
+        90px
+        55px
+        80px
+        35px;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        #bbb297
+        rgba(187, 178, 151, 0.10);
+
+    scrollbar-gutter: stable;
+}
+
+
+/* Chrome scrollbar */
+
+.music-more-details::-webkit-scrollbar {
+    width: 7px;
+}
+
+.music-more-details::-webkit-scrollbar-track {
+    background:
+        rgba(187, 178, 151, 0.10);
+}
+
+.music-more-details::-webkit-scrollbar-thumb {
+    background: #bbb297;
+}
+
+.music-more-details::-webkit-scrollbar-thumb:hover {
+    background: #d8cfb1;
+}
+
+
+/* SECTIONS */
+
+.more-section {
+    margin-bottom: 34px;
+}
+
+.more-section h3 {
+    margin:
+        0
+        0
+        9px
+        0;
+
+    font-family: "Roman Antique", serif;
+    font-size: 25px;
+    font-weight: normal;
+
+    color: #bbb297;
+}
+
+.more-section p {
+    margin: 0;
+
+    font-family: "Garamond", serif;
+    font-size: 18px;
+    line-height: 1.45;
+
+    color: #d7d4ca;
+}
+
+
+/* Preserve lyric / credit line breaks */
+
+.more-credits,
+.more-lyrics {
+    white-space: pre-line;
+}
+
+
+/* Related links */
+
+.more-related {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    font-family: "Garamond", serif;
+    font-size: 18px;
+}
+
+.more-related a {
+    color: #bbb297;
+    text-decoration: none;
+
+    border-bottom:
+        1px solid rgba(187, 178, 151, 0.35);
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.more-related a:hover {
+    color: #f0dfad;
+
+    border-color:
+        rgba(240, 223, 173, 0.75);
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.35);
+}
+
+.more-related .related-no-link {
+    color: #bbb297;
+}
+
+
+
+
+/* =========================
+   EP TRACKLIST
+   ========================= */
+
+.more-tracklist {
+    margin: 0;
+    padding-left: 24px;
+
+    font-family: "Garamond", serif;
+    font-size: 18px;
+    line-height: 1.55;
+
+    color: #d7d4ca;
+}
+
+.more-tracklist li {
+    padding-left: 4px;
+}
+
+
+/* =========================
+   EP LYRICS
+   ========================= */
+
+.more-track-lyrics {
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+.track-lyrics-item {
+    padding-bottom: 10px;
+
+    border-bottom:
+        1px solid rgba(187, 178, 151, 0.20);
+}
+
+
+.track-lyrics-item summary {
+    position: relative;
+
+    padding-right: 32px;
+
+    list-style: none;
+
+    font-family: "Roman Antique", serif;
+    font-size: 22px;
+    font-weight: normal;
+
+    color: #bbb297;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease;
+}
+
+
+/* убираем стандартную браузерную стрелку */
+
+.track-lyrics-item summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* наша стрелочка */
+
+.track-lyrics-item summary::after {
+    content: "›";
+
+    position: absolute;
+
+    right: 6px;
+    top: 50%;
+
+    transform:
+        translateY(-50%)
+        rotate(0deg);
+
+    font-family: "Garamond", serif;
+    font-size: 25px;
+
+    color: #bbb297;
+
+    transition:
+        transform 0.22s ease,
+        color 0.18s ease;
+}
+
+
+.track-lyrics-item[open] summary::after {
+    transform:
+        translateY(-50%)
+        rotate(90deg);
+}
+
+
+.track-lyrics-item summary:hover {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.35);
+}
+
+
+.track-lyrics-text {
+    margin:
+        17px
+        0
+        4px
+        0;
+
+    font-family: "Garamond", serif;
+    font-size: 18px;
+    line-height: 1.45;
+
+    white-space: pre-line;
+
+    color: #d7d4ca;
+}
+
+
+
+
+/* =========================
+   MUSIC - LISTEN WINDOW
+   ========================= */
+
+.music-listen-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(20, 12, 10, 0.38);
+    backdrop-filter: blur(4px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    z-index: 100;
+
+    transition:
+        opacity 0.28s ease,
+        visibility 0.28s ease;
+}
+
+
+/* Когда Listen открыт */
+
+.music-listen-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* Само чёрное окно */
+
+.music-listen-window {
+    position: relative;
+
+    width: min(850px, 82vw);
+    min-height: 330px;
+
+    box-sizing: border-box;
+
+    padding: 60px 42px 48px;
+
+    background: rgba(10, 7, 5, 0.96);
+
+    opacity: 0;
+
+    transform:
+        translateY(6px)
+        scale(0.99);
+
+    transition:
+        opacity 0.28s ease,
+        transform 0.28s ease;
+}
+
+
+.music-listen-overlay.open .music-listen-window {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* X */
+
+.music-listen-close {
+    position: absolute;
+
+    top: 14px;
+    right: 18px;
+
+    padding: 4px;
+
+    border: none;
+    background: transparent;
+
+    font-family: "Roman Antique", serif;
+    font-size: 28px;
+
+    color: #bbb297;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.music-listen-close:hover {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 6px rgba(240, 210, 140, 0.45);
+
+    transform: scale(1.07);
+}
+
+
+/* Listen to this song on: */
+
+.music-listen-title {
+    margin: 0 0 50px 0;
+
+    text-align: center;
+
+    font-family: "Roman Antique", serif;
+    font-size: 27px;
+    font-weight: normal;
+
+    color: #bbb297;
+}
+
+
+/* Здесь позже появятся платформы */
+
+.music-listen-platforms {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+.listen-platform-button {
+    width: 165px;
+    height: 72px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    padding: 10px 12px;
+
+    border:
+        1px solid rgba(187, 178, 151, 0.48);
+
+    background: transparent;
+
+    font-family: "Garamond", serif;
+    font-size: 19px;
+
+    color: #bbb297;
+
+    text-decoration: none;
+
+    transition:
+        border-color 0.18s ease,
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.listen-platform-button img {
+    width: 43px;
+    height: 43px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+
+.listen-platform-button:hover {
+    color: #f0dfad;
+
+    border-color:
+        rgba(240, 223, 173, 0.8);
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.38);
+
+    box-shadow:
+        0 0 10px rgba(240, 210, 140, 0.10);
+
+    transform: scale(1.03);
+}
+
+
+/* Пока ссылки ещё не добавлены */
+
+.listen-platform-button.is-disabled {
+    cursor: default;
+}
+
+
+
+
+/* =========================
+   PHOTOS SCREEN
+   ========================= */
+
+.photos-screen {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    background: #432f29;
+    color: #d7d4ca;
+
+    overflow: hidden;
+}
+
+
+/* HEADER */
+
+.photos-header {
+    position: absolute;
+
+    top: 20%;
+    left: 13.3%;
+
+    width: 73%;
+}
+
+.photos-header h2 {
+    margin: 0;
+
+    font-family: "Roman Antique", serif;
+    font-size: 40px;
+    font-weight: normal;
+
+    color: #bbb297;
+}
+
+
+/* COLLECTIONS / ALL PHOTOGRAPHS */
+
+.photos-tabs {
+    position: absolute;
+
+    top: 3px;
+    left: 47%;
+
+    display: flex;
+    gap: 62px;
+}
+
+.photos-tab {
+    padding: 3px 4px 6px;
+
+    border: none;
+    border-bottom: 1px solid transparent;
+
+    background: transparent;
+
+    font-family: "Garamond", serif;
+    font-size: 18px;
+
+    color: #9f9784;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        text-shadow 0.18s ease;
+}
+
+.photos-tab:hover {
+    color: #e0d5b7;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.3);
+}
+
+.photos-tab.active {
+    color: #d8ceb0;
+
+    border-bottom-color:
+        rgba(216, 206, 176, 0.65);
+}
+
+
+/* =========================
+   COLLECTION PREVIEWS
+   ========================= */
+
+.photos-collections {
+    position: absolute;
+
+    top: 30%;
+    left: 50%;
+
+    width: min(72vw, 1100px);
+    height: 58vh;
+
+    transform: translateX(-50%);
+}
+
+
+/* remove normal button appearance */
+
+.photo-collection {
+    position: absolute;
+
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #bbb297;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+/* IMAGES */
+
+.photo-collection img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0.88;
+
+    filter: brightness(0.88);
+
+    transition:
+        opacity 0.25s ease,
+        filter 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* LABEL */
+
+.photo-collection span {
+    display: block;
+
+    margin-top: 10px;
+
+    font-family: "Roman Antique", serif;
+    font-size: 23px;
+
+    color: #bbb297;
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease;
+}
+
+
+/* HOVER */
+
+.photo-collection:hover img {
+    opacity: 1;
+
+    filter: brightness(1);
+
+    transform: scale(1.018);
+}
+
+.photo-collection:hover span {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.35);
+}
+
+
+/* =========================
+   INDIVIDUAL POSITIONS
+   ========================= */
+
+/* WOODS */
+
+.photo-collection[data-collection="woods"] {
+    left: 0%;
+    top: 3%;
+
+    width: 300px;
+    height: 200px;
+}
+
+
+/* EVENINGS */
+
+.photo-collection[data-collection="evenings"] {
+    left: 39%;
+    top: 0%;
+
+    width: 350px;
+    height: 190px;
+}
+
+
+/* SKY */
+
+.photo-collection[data-collection="sky"] {
+    left: 13%;
+    top: 48%;
+
+    width: 220px;
+    height: 270px;
+}
+
+
+/* HUMAN TRACES */
+
+.photo-collection[data-collection="human-traces"] {
+    left: 59%;
+    top: 43%;
+
+    width: 310px;
+    height: 205px;
+}
+
+
+
+/* =========================
+   ALL PHOTOGRAPHS
+   ========================= */
+
+.photos-all-grid {
+    position: absolute;
+
+    top: 29%;
+    left: 50%;
+
+    width: min(76vw, 1180px);
+    height: 64vh;
+
+    transform: translateX(-50%);
+
+    overflow-y: auto;
+
+    padding:
+        8px
+        18px
+        90px
+        8px;
+
+    box-sizing: border-box;
+
+    column-count: 4;
+    column-gap: 18px;
+
+    display: none;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        #bbb297
+        rgba(187, 178, 151, 0.08);
+}
+
+
+/* scrollbar Chrome */
+
+.photos-all-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.photos-all-grid::-webkit-scrollbar-track {
+    background:
+        rgba(187, 178, 151, 0.08);
+}
+
+.photos-all-grid::-webkit-scrollbar-thumb {
+    background:
+        rgba(187, 178, 151, 0.65);
+}
+
+
+/* individual photograph */
+
+.all-photo-item {
+    display: block;
+
+    width: 100%;
+
+    margin:
+        0
+        0
+        18px
+        0;
+
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    break-inside: avoid;
+
+    cursor: pointer;
+}
+
+
+.all-photo-item img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    opacity: 0.88;
+
+    transition:
+        opacity 0.24s ease,
+        filter 0.24s ease,
+        transform 0.24s ease;
+
+    filter: brightness(0.9);
+}
+
+
+.all-photo-item:hover img {
+    opacity: 1;
+
+    filter: brightness(1);
+
+    transform: scale(1.012);
+}
+
+
+
+/* =========================
+   OPEN PHOTO COLLECTION
+   ========================= */
+
+.photos-collection-view {
+    position: absolute;
+
+    top: 27%;
+    left: 50%;
+
+    width: min(76vw, 1180px);
+    height: 67vh;
+
+    transform: translateX(-50%);
+
+    display: none;
+}
+
+
+.photos-collection-title {
+    margin: 0 0 22px 8px;
+
+    font-family: "Roman Antique", serif;
+    font-size: 27px;
+    font-weight: normal;
+
+    color: #bbb297;
+}
+
+
+.photos-collection-grid {
+    width: 100%;
+    height: calc(100% - 55px);
+
+    box-sizing: border-box;
+
+    padding:
+        8px
+        18px
+        80px
+        8px;
+
+    overflow-y: auto;
+
+    column-count: 4;
+    column-gap: 18px;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        #bbb297
+        rgba(187, 178, 151, 0.08);
+}
+
+
+.photos-collection-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.photos-collection-grid::-webkit-scrollbar-track {
+    background:
+        rgba(187, 178, 151, 0.08);
+}
+
+
+.photos-collection-grid::-webkit-scrollbar-thumb {
+    background:
+        rgba(187, 178, 151, 0.65);
+}
+
+
+
+/* =========================
+   PHOTO VIEWER
+   ========================= */
+
+.photo-viewer {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(8, 5, 4, 0.88);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    z-index: 200;
+
+    transition:
+        opacity 0.28s ease,
+        visibility 0.28s ease;
+}
+
+
+.photo-viewer.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* PHOTO */
+
+.photo-viewer-image {
+    display: block;
+
+    max-width: 78vw;
+    max-height: 82vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transform: scale(0.985);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.photo-viewer.open .photo-viewer-image {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+/* X */
+
+.photo-viewer-close {
+    position: absolute;
+
+    top: 5%;
+    right: 5%;
+
+    padding: 5px;
+
+    border: none;
+    background: transparent;
+
+    font-family: "Roman Antique", serif;
+    font-size: 29px;
+
+    color: #bbb297;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.photo-viewer-close:hover {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 6px rgba(240, 210, 140, 0.45);
+
+    transform: scale(1.08);
+}
+
+
+/* LEFT / RIGHT */
+
+.photo-viewer-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    padding: 15px;
+
+    border: none;
+    background: transparent;
+
+    transform: translateY(-50%);
+
+    opacity: 0.75;
+
+    cursor: pointer;
+
+    transition:
+        opacity 0.18s ease,
+        filter 0.18s ease;
+}
+
+
+.photo-viewer-arrow img {
+    width: 30px;
+    height: 30px;
+
+    object-fit: contain;
+}
+
+
+.photo-viewer-prev {
+    left: 5%;
+}
+
+
+.photo-viewer-next {
+    right: 5%;
+}
+
+
+.photo-viewer-next img {
+    transform: rotate(180deg);
+}
+
+
+.photo-viewer-arrow:hover {
+    opacity: 1;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(240, 210, 140, 0.4)
+        );
+}
+
+
+/* COUNTER */
+
+.photo-viewer-counter {
+    position: absolute;
+
+    bottom: 4%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    margin: 0;
+
+    font-family: "Garamond", serif;
+    font-size: 16px;
+
+    color: #bbb297;
+
+    opacity: 0.8;
+}
+
+
+
+.photos-collection-header {
+    position: relative;
+    display: block;
+
+    margin-bottom: 22px;
+}
+
+
+.photos-collection-back {
+    position: absolute;
+
+    left: -88px;
+    top: 65px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #bbb297;
+
+    font-family: "Garamond", serif;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    opacity: 0.72;
+
+    transition:
+        opacity 0.18s ease,
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.photos-collection-back img {
+    width: 18px;
+    height: 18px;
+
+    object-fit: contain;
+}
+
+
+.photos-collection-back:hover {
+    opacity: 1;
+
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.35);
+
+    transform: translateX(-3px);
+}
+
+
+.photos-collection-back span {
+    white-space: nowrap;
+}
+
+
+
+
+
+/* =========================
+   ARCHIVE
+   ========================= */
+
+.archive-screen {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    background: #201d18;
+    color: #d7d4ca;
+
+    overflow: hidden;
+}
+
+
+/* HEADER */
+
+.archive-header {
+    position: absolute;
+
+    top: 20%;
+    left: 13.3%;
+
+    width: 73%;
+}
+
+
+.archive-header h2 {
+    margin: 0;
+
+    font-family: "Roman Antique", serif;
+    font-size: 40px;
+    font-weight: normal;
+
+    color: #bbb297;
+}
+
+
+/* FILTERS */
+
+.archive-filters {
+    position: absolute;
+
+    top: 4px;
+    left: 40%;
+
+    display: flex;
+    gap: 48px;
+}
+
+
+.archive-filter {
+    padding: 3px 8px 5px;
+
+    border: 1px solid transparent;
+    background: transparent;
+
+    font-family: "Garamond", serif;
+    font-size: 17px;
+
+    color: #9f9784;
+
+    cursor: pointer;
+
+    transition:
+        color 0.18s ease,
+        border-color 0.18s ease,
+        text-shadow 0.18s ease;
+}
+
+
+.archive-filter:hover {
+    color: #e0d5b7;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.30);
+}
+
+
+.archive-filter.active {
+    color: #d8ceb0;
+
+    border-color:
+        rgba(187, 178, 151, 0.55);
+}
+
+
+/* =========================
+   ARCHIVE LIST
+   ========================= */
+
+.archive-list {
+    position: absolute;
+
+    top: 31%;
+    left: 50%;
+
+    width: min(72vw, 1120px);
+    height: 57vh;
+
+    transform: translateX(-50%);
+
+    overflow-y: auto;
+
+    padding-right: 15px;
+
+    box-sizing: border-box;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        #bbb297
+        rgba(187, 178, 151, 0.08);
+}
+
+
+.archive-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.archive-list::-webkit-scrollbar-track {
+    background:
+        rgba(187, 178, 151, 0.08);
+}
+
+
+.archive-list::-webkit-scrollbar-thumb {
+    background:
+        rgba(187, 178, 151, 0.6);
+}
+
+
+/* ONE TERMINAL ROW */
+
+.archive-row {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        90px
+        125px
+        1fr
+        80px;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 15px 12px;
+
+    box-sizing: border-box;
+
+    border: none;
+
+    border-bottom:
+        1px solid rgba(187, 178, 151, 0.16);
+
+    background: transparent;
+
+    text-align: left;
+
+    color: #bdb6a4;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        padding-left 0.18s ease,
+        text-shadow 0.18s ease;
+}
+
+
+.archive-row:hover {
+    background:
+        rgba(187, 178, 151, 0.055);
+
+    color: #efe1bc;
+
+    padding-left: 18px;
+
+    text-shadow:
+        0 0 5px rgba(240, 210, 140, 0.22);
+}
+
+
+.archive-code {
+    font-family: "Roman Antique", serif;
+    font-size: 17px;
+
+    color: #bbb297;
+}
+
+
+.archive-type {
+    font-family: "Garamond", serif;
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.65;
+}
+
+
+.archive-name {
+    font-family: "Garamond", serif;
+    font-size: 18px;
+}
+
+
+.archive-year {
+    font-family: "Garamond", serif;
+    font-size: 15px;
+
+    text-align: right;
+
+    opacity: 0.65;
+}
+
+
+/* =========================
+   ARCHIVE ITEM WINDOW
+   ========================= */
+
+.archive-item-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(8, 7, 5, 0.72);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    z-index: 250;
+
+    transition:
+        opacity 0.26s ease,
+        visibility 0.26s ease;
+}
+
+
+.archive-item-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+.archive-item-window {
+    position: relative;
+
+    width: min(76vw, 1050px);
+    max-height: 82vh;
+
+    box-sizing: border-box;
+
+    padding:
+        60px
+        70px
+        65px;
+
+    overflow-y: auto;
+
+    background: #0d0c09;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        #bbb297
+        rgba(187, 178, 151, 0.08);
+}
+
+
+.archive-item-close {
+    position: absolute;
+
+    top: 18px;
+    right: 22px;
+
+    padding: 4px;
+
+    border: none;
+    background: transparent;
+
+    font-family: "Roman Antique", serif;
+    font-size: 29px;
+
+    color: #bbb297;
+
+    cursor: pointer;
+}
+
+
+.archive-item-close:hover {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 6px rgba(240, 210, 140, 0.4);
+}
+
+
+.archive-item-meta {
+    display: flex;
+    gap: 22px;
+
+    margin-bottom: 17px;
+
+    font-family: "Garamond", serif;
+    font-size: 14px;
+
+    color: #918a79;
+
+    letter-spacing: 0.5px;
+}
+
+
+.archive-item-title {
+    margin:
+        0
+        0
+        15px;
+
+    font-family: "Roman Antique", serif;
+    font-size: 29px;
+    font-weight: normal;
+
+    color: #bbb297;
+}
+
+
+.archive-item-description {
+    margin:
+        0
+        0
+        32px;
+
+    max-width: 760px;
+
+    font-family: "Garamond", serif;
+    font-size: 17px;
+    line-height: 1.5;
+
+    color: #c8c1b0;
+}
+
+
+/* VISUAL */
+
+.archive-visual {
+    display: block;
+
+    max-width: 620px;
+    max-height: 58vh;
+
+    width: auto;
+    height: auto;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+
+/* WRITING */
+
+.archive-writing {
+    margin: 0;
+
+    font-family: "Garamond", serif;
+    font-size: 18px;
+    line-height: 1.55;
+
+    color: #d7d4ca;
+
+    white-space: pre-line;
+}
+
+
+/* =========================
+   CUSTOM AUDIO PLAYER
+   ========================= */
+
+.archive-audio-player {
+    display: grid;
+
+    grid-template-columns:
+        42px
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-top: 25px;
+
+    padding:
+        18px
+        20px;
+
+    border:
+        1px solid rgba(187, 178, 151, 0.32);
+}
+
+
+.archive-audio-play {
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    font-family: "Garamond", serif;
+    font-size: 24px;
+
+    color: #bbb297;
+
+    cursor: pointer;
+}
+
+
+.archive-audio-play:hover {
+    color: #f0dfad;
+}
+
+
+.archive-audio-progress {
+    width: 100%;
+
+    accent-color: #bbb297;
+
+    cursor: pointer;
+}
+
+
+.archive-audio-time {
+    min-width: 95px;
+
+    font-family: "Garamond", serif;
+    font-size: 14px;
+
+    color: #aaa18e;
+
+    text-align: right;
+}
+
+
+/* =========================
+   SUPPORT / KO-FI WINDOW
+   ========================= */
+
+.support-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(10, 7, 6, 0.72);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    z-index: 300;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+.support-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* MAIN WINDOW */
+
+.support-window {
+    position: relative;
+
+    width: min(520px, 88vw);
+    height: min(720px, 82vh);
+
+    background: #0d0b09;
+
+    box-sizing: border-box;
+
+    padding: 42px 18px 18px;
+
+    overflow: hidden;
+}
+
+
+/* CLOSE X */
+
+.support-close {
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    padding: 4px;
+
+    border: none;
+    background: transparent;
+
+    font-family: "Roman Antique", serif;
+    font-size: 27px;
+
+    color: #bbb297;
+
+    cursor: pointer;
+
+    z-index: 2;
+
+    transition:
+        color 0.18s ease,
+        text-shadow 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.support-close:hover {
+    color: #f0dfad;
+
+    text-shadow:
+        0 0 6px rgba(240, 210, 140, 0.45);
+
+    transform: scale(1.08);
+}
+
+
+/* KO-FI */
+
+#kofiframe {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    background: #f9f9f9;
+}
+
+
+
+/* ======================
+   SOUND TOGGLE
+   ====================== */
+
+.sound-toggle {
+    position: fixed;
+    right: 34px;
+    bottom: 28px;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #bbb297;
+
+    opacity: 0.21;
+
+    cursor: pointer;
+
+    z-index: 50;
+
+    transition:
+        opacity 0.2s ease,
+        color 0.2s ease,
+        text-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.sound-toggle:hover {
+    opacity: 1;
+
+    color: #f0dfad;
+
+    filter:
+        drop-shadow(
+            0 0 5px rgba(240, 210, 140, 0.45)
+        );
+
+    transform: scale(1.06);
+}
+
+.sound-speaker {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.speaker-body {
+    fill: currentColor;
+    stroke: none;
+}
+
+.sound-wave {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+.sound-off-mark {
+    position: absolute;
+
+    right: 1px;
+    top: 2px;
+
+    font-family: "Roman Antique", serif;
+    font-size: 30px;
+
+    color: #bbb297;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s ease,
+        color 0.2s ease;
+}
+
+.sound-toggle.is-muted .sound-wave {
+    opacity: 0;
+}
+
+.sound-toggle.is-muted .sound-off-mark {
+    opacity: 1;
+}
+
+
+
+/* ARCHIVE VISUAL SET */
+
+.archive-visual-set {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+
+    align-items: start;
+}
+
+.archive-visual-set-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-height: 58vh;
+
+    object-fit: contain;
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+
+    .enter-text {
+        font-size: 24px;
+        bottom: 16%;
+        white-space: nowrap;
+    }
+
+    .logo-image {
+        top: 27%;
+        width: 86vw;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .menu-logo {
+        width: 40vw;
+        max-width: none;
+    }
+
+    .menu-description {
+        font-size: 16px;
+        bottom: 6%;
+        width: 82vw;
+        white-space: normal;
+        line-height: 1.25;
+    }
+
+    .menu-description {
+        display: none;
+    }
+
+    .menu a {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        user-select: none;
+    }
+
+    .menu a:hover {
+        color: #bbb297;
+        text-shadow: none;
+        transform: none;
+    }
+
+    .support-area {
+        width: 73%;
+    }
+
+/* =========================
+   MUSIC - MOBILE
+   ========================= */
+
+.music-heading {
+    top: 17%;
+    left: 50%;
+
+    width: 86%;
+
+    transform: translateX(-50%);
+}
+
+.music-heading h2 {
+    font-size: 34px;
+}
+
+
+/* YEARS */
+
+.music-filters {
+    position: static;
+
+    width: 100%;
+
+    margin-top: 38px;
+    margin-left: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 0;
+
+    transform: none;
+}
+
+.music-filter {
+    padding: 4px 8px;
+
+    font-size: 16px;
+}
+
+
+/* CAROUSEL */
+
+.music-carousel {
+    top: 31%;
+    left: 50%;
+
+    width: 100%;
+    height: 300px;
+
+    transform: translateX(-50%);
+}
+
+.cover-stage {
+    top: 0;
+    left: 50%;
+
+    width: 100%;
+    height: 280px;
+
+    transform: translateX(-50%);
+
+    touch-action: pan-y;
+}
+
+
+/* COVER SIZE */
+
+.music-cover {
+    width: 240px;
+    height: 240px;
+
+    margin-left: -120px;
+    margin-top: -120px;
+}
+
+
+/* CURRENT */
+
+.music-cover-current {
+    transform:
+        translateX(0)
+        scale(1);
+}
+
+
+/* SIDE COVERS */
+
+.music-cover-prev {
+    transform:
+        translateX(-80px)
+        scale(0.62);
+
+    opacity: 0.62;
+}
+
+.music-cover-next {
+    transform:
+        translateX(80px)
+        scale(0.62);
+
+    opacity: 0.62;
+}
+
+
+/* FAR COVERS */
+
+.music-cover-far-prev {
+    transform:
+        translateX(-80px)
+        scale(0.62);
+
+    opacity: 0;
+}
+
+.music-cover-far-next {
+    transform:
+        translateX(80px)
+        scale(0.62);
+
+    opacity: 0;
+}
+
+
+/* ARROWS */
+
+.carousel-arrow {
+    top: 48%;
+
+    padding: 4px;
+
+    z-index: 10;
+}
+
+.carousel-arrow-left {
+    left: 10px;
+}
+
+.carousel-arrow-right {
+    right: 10px;
+}
+
+.carousel-arrow img {
+    width: 24px;
+    height: 24px;
+}
+
+
+/* RELEASE INFO */
+
+.release-info {
+    top: 65%;
+    left: 50%;
+
+    width: 86%;
+
+    transform: translateX(-50%);
+}
+
+.release-title {
+    font-size: 17px;
+    line-height: 1.3;
+}
+
+.release-artist {
+    margin-top: 6px;
+
+    font-size: 16px;
+}
+
+
+/* LISTEN + MORE */
+
+.release-actions {
+    gap: 52px;
+
+    margin-top: 88px;
+}
+
+.release-button {
+    padding: 5px 13px;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   MOBILE CAROUSEL ANIMATION
+   ========================= */
+
+
+/* NEXT */
+
+.cover-stage.is-moving-next .music-cover-far-prev {
+    transform:
+        translateX(-80px)
+        scale(0.62);
+
+    opacity: 0;
+}
+
+.cover-stage.is-moving-next .music-cover-prev {
+    transform:
+        translateX(-80px)
+        scale(0.62);
+
+    opacity: 0;
+
+    filter: brightness(0.78);
+}
+
+.cover-stage.is-moving-next .music-cover-current {
+    transform:
+        translateX(-80px)
+        scale(0.62);
+
+    opacity: 0.62;
+
+    filter: brightness(0.78);
+
+    z-index: 2;
+}
+
+.cover-stage.is-moving-next .music-cover-next {
+    transform:
+        translateX(0)
+        scale(1);
+
+    opacity: 1;
+
+    filter: brightness(1);
+
+    z-index: 4;
+}
+
+.cover-stage.is-moving-next .music-cover-far-next {
+    transform:
+        translateX(80px)
+        scale(0.62);
+
+    opacity: 0.62;
+
+    filter: brightness(0.78);
+
+    z-index: 1;
+
+    transition:
+        opacity 0.38s ease-in,
+        filter 0.65s ease;
+}
+
+
+/* PREVIOUS */
+
+.cover-stage.is-moving-prev .music-cover-far-next {
+    transform:
+        translateX(80px)
+        scale(0.62);
+
+    opacity: 0;
+}
+
+.cover-stage.is-moving-prev .music-cover-next {
+    transform:
+        translateX(80px)
+        scale(0.62);
+
+    opacity: 0;
+
+    filter: brightness(0.78);
+}
+
+.cover-stage.is-moving-prev .music-cover-current {
+    transform:
+        translateX(80px)
+        scale(0.62);
+
+    opacity: 0.62;
+
+    filter: brightness(0.78);
+
+    z-index: 2;
+}
+
+.cover-stage.is-moving-prev .music-cover-prev {
+    transform:
+        translateX(0)
+        scale(1);
+
+    opacity: 1;
+
+    filter: brightness(1);
+
+    z-index: 4;
+}
+
+.cover-stage.is-moving-prev .music-cover-far-prev {
+    transform:
+        translateX(-80px)
+        scale(0.62);
+
+    opacity: 0.62;
+
+    filter: brightness(0.78);
+
+    z-index: 1;
+
+    transition:
+        opacity 0.38s ease-in,
+        filter 0.65s ease;
+}
+
+
+
+
+/* =========================
+   PHOTOS - MOBILE
+   ========================= */
+
+/* HEADER */
+
+.photos-header {
+    top: 17%;
+    left: 50%;
+
+    width: 86%;
+
+    transform: translateX(-50%);
+}
+
+.photos-header h2 {
+    font-size: 34px;
+}
+
+
+/* COLLECTIONS / ALL PHOTOGRAPHS */
+
+.photos-tabs {
+    position: static;
+
+    margin-top: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 38px;
+}
+
+.photos-tab {
+    padding: 3px 3px 6px;
+
+    font-size: 16px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   ALL PHOTOGRAPHS - PINTEREST
+   ========================= */
+
+.photos-all-grid {
+    position: relative;
+
+    top: auto;
+    left: auto;
+
+    width: 94%;
+    height: auto;
+
+    margin:
+        300px
+        auto
+        45px;
+
+    transform: none;
+
+    box-sizing: border-box;
+
+    padding: 0;
+
+    column-count: 2;
+    column-gap: 8px;
+
+    overflow: visible;
+}
+
+.photos-all-grid::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* PHOTO */
+
+.all-photo-item {
+    display: inline-block;
+
+    width: 100%;
+
+    margin:
+        0
+        0
+        8px;
+
+    padding: 0;
+
+    break-inside: avoid;
+
+    vertical-align: top;
+}
+
+.all-photo-item img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    opacity: 1;
+
+    filter: none;
+    transform: none;
+
+    border-radius: 8px;
+}
+
+
+/* NO STICKY HOVER ON PHONE */
+
+.all-photo-item:hover img {
+    opacity: 1;
+
+    filter: none;
+
+    transform: none;
+}
+
+
+.photos-screen {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+
+    touch-action: pan-y;
+}
+
+
+/* =========================
+   PHOTO VIEWER - MOBILE
+   ========================= */
+
+.photo-viewer-image {
+    max-width: 76vw;
+    max-height: 76vh;
+}
+
+.photo-viewer-arrow {
+    top: 50%;
+
+    padding: 4px;
+
+    opacity: 0.72;
+
+    z-index: 5;
+}
+
+.photo-viewer-arrow img {
+    width: 16px;
+    height: 16px;
+}
+
+.photo-viewer-prev {
+    left: 3%;
+}
+
+.photo-viewer-next {
+    right: 3%;
+}
+
+
+/* =========================
+   PHOTO COLLECTIONS - MOBILE
+   ========================= */
+
+.photos-collections {
+    position: relative;
+
+    top: auto;
+    left: auto;
+
+    width: 86%;
+    height: auto;
+
+    margin:
+        300px
+        auto
+        50px;
+
+    transform: none;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 10px;
+    row-gap: 26px;
+}
+
+
+/* RESET DESKTOP ABSOLUTE POSITIONING */
+
+.photo-collection {
+    position: relative;
+
+    left: auto !important;
+    top: auto !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    display: block;
+}
+
+
+/* IMAGES */
+
+.photo-collection img {
+    width: 100%;
+    height: auto;
+
+    object-fit: cover;
+
+    opacity: 1;
+    filter: none;
+}
+
+
+/* COLLECTION TITLES */
+
+.photo-collection span {
+    margin-top: 7px;
+
+    font-size: 19px;
+}
+
+
+/* WOODS */
+
+.photo-collection[data-collection="woods"] img {
+    aspect-ratio: 4 / 3;
+}
+
+
+/* EVENINGS */
+
+.photo-collection[data-collection="evenings"] img {
+    aspect-ratio: 16 / 10;
+}
+
+
+/* SKY */
+
+.photo-collection[data-collection="sky"] img {
+    aspect-ratio: 3 / 4;
+}
+
+
+/* HUMAN TRACES */
+
+.photo-collection[data-collection="human-traces"] img {
+    aspect-ratio: 4 / 3;
+}
+
+
+/* REMOVE STICKY HOVER ON TOUCH */
+
+.photo-collection:hover img {
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+.photo-collection:hover span {
+    color: #bbb297;
+    text-shadow: none;
+}
+
+
+/* =========================
+   OPEN COLLECTION - MOBILE
+   ========================= */
+
+.photos-collection-view {
+    position: relative;
+
+    top: auto;
+    left: auto;
+
+    width: 94%;
+    height: auto;
+
+    margin:
+        300px
+        auto
+        45px;
+
+    transform: none;
+}
+
+
+/* WOODS + BACK */
+
+.photos-collection-header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-bottom: 14px;
+    padding: 0 4px;
+
+    box-sizing: border-box;
+}
+
+.photos-collection-title {
+    margin: 0;
+
+    font-size: 24px;
+}
+
+.photos-collection-back {
+    position: static;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 5px;
+
+    font-size: 13px;
+
+    opacity: 0.75;
+}
+
+.photos-collection-back img {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* PINTEREST GRID */
+
+.photos-collection-grid {
+    width: 100%;
+    height: auto;
+
+    padding: 0;
+
+    column-count: 2;
+    column-gap: 8px;
+
+    overflow: visible;
+}
+
+
+/* HIDE INTERNAL SCROLLBAR */
+
+.photos-collection-grid::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================
+   LISTEN WINDOW - MOBILE
+   ========================= */
+
+.music-listen-window {
+    width: 86vw;
+    min-height: 0;
+
+    padding:
+        56px
+        16px
+        34px;
+}
+
+.music-listen-title {
+    margin-bottom: 30px;
+
+    font-size: 23px;
+}
+
+.music-listen-platforms {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+.listen-platform-button {
+    width: 100%;
+    height: 62px;
+
+    min-width: 0;
+
+    gap: 8px;
+
+    padding: 8px;
+
+    font-size: 16px;
+}
+
+.listen-platform-button img {
+    width: 34px;
+    height: 34px;
+}
+
+
+
+/* =========================
+   LISTEN BLUR FIX - MOBILE
+   ========================= */
+
+.music-listen-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(20, 12, 10, 0.48);
+}
+
+.music-screen.listen-open > .back-control,
+.music-screen.listen-open > .music-heading,
+.music-screen.listen-open > .music-carousel,
+.music-screen.listen-open > .release-info {
+    filter: blur(4px);
+}
+
+
+/* =========================
+   MORE WINDOW - MOBILE
+   ========================= */
+
+.music-more-window {
+    width: 86vw;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+
+    grid-template-columns: none;
+
+    overflow: hidden;
+}
+
+
+/* COVER */
+
+.music-more-cover-area {
+    flex: 0 0 auto;
+
+    padding:
+        48px
+        20px
+        18px;
+}
+
+.music-more-cover {
+    width: 300px;
+    height: 300px;
+
+    max-height: none;
+
+    object-fit: cover;
+}
+
+
+/* INFORMATION */
+
+.music-more-details {
+    flex: 1 1 auto;
+
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    box-sizing: border-box;
+
+    padding:
+        10px
+        24px
+        40px;
+
+    overflow-y: auto;
+
+    scrollbar-gutter: auto;
+}
+
+
+/* SECTIONS */
+
+.more-section {
+    margin-bottom: 27px;
+}
+
+.more-section h3 {
+    margin-bottom: 7px;
+
+    font-size: 19px;
+}
+
+.more-section p {
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+
+/* X */
+
+.music-more-close {
+    top: 12px;
+    right: 14px;
+
+    font-size: 26px;
+}
+
+
+/* =========================
+   MORE BLUR FIX - MOBILE
+   ========================= */
+
+.music-more-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(20, 12, 10, 0.48);
+}
+
+.music-screen.more-open > .back-control,
+.music-screen.more-open > .music-heading,
+.music-screen.more-open > .music-carousel,
+.music-screen.more-open > .release-info {
+    filter: blur(4px);
+}
+
+
+/* =========================
+   ARCHIVE - MOBILE
+   ========================= */
+
+.archive-header {
+    top: 17%;
+    left: 50%;
+
+    width: 86%;
+
+    transform: translateX(-50%);
+}
+
+.archive-header h2 {
+    font-size: 34px;
+}
+
+
+/* FILTERS */
+
+.archive-filters {
+    position: static;
+
+    margin-top: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.archive-filter {
+    padding: 3px 6px 4px;
+
+    font-size: 15px;
+}
+
+
+/* LIST */
+
+.archive-list {
+    top: 31%;
+    left: 50%;
+
+    width: 86%;
+    height: 61vh;
+
+    transform: translateX(-50%);
+
+    padding-right: 5px;
+}
+
+
+/* ONE ARCHIVE ENTRY */
+
+.archive-row {
+    display: grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+
+    grid-template-areas:
+        "code type year"
+        "name name name";
+
+    column-gap: 12px;
+    row-gap: 8px;
+
+    padding:
+        14px
+        8px
+        16px;
+}
+
+
+/* PLACE THE ELEMENTS */
+
+.archive-code {
+    grid-area: code;
+
+    font-size: 15px;
+}
+
+.archive-type {
+    grid-area: type;
+
+    font-size: 11px;
+}
+
+.archive-name {
+    grid-area: name;
+
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.archive-year {
+    grid-area: year;
+
+    font-size: 13px;
+
+    text-align: right;
+}
+
+.archive-row:hover {
+    padding-left: 8px;
+}
+
+
+/* =========================
+   ARCHIVE ITEM - MOBILE
+   ========================= */
+
+.archive-item-window {
+    width: 90vw;
+    max-height: 82vh;
+
+    padding:
+        52px
+        22px
+        34px;
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+}
+
+
+/* X */
+
+.archive-item-close {
+    top: 12px;
+    right: 14px;
+
+    font-size: 26px;
+}
+
+
+/* META */
+
+.archive-item-meta {
+    gap: 15px;
+
+    margin-bottom: 14px;
+
+    font-size: 12px;
+}
+
+
+/* TITLE */
+
+.archive-item-title {
+    margin-bottom: 14px;
+
+    font-size: 23px;
+    line-height: 1.25;
+}
+
+
+/* DESCRIPTION */
+
+.archive-item-description {
+    width: 100%;
+    max-width: none;
+
+    margin-bottom: 25px;
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   VISUAL
+   ========================= */
+
+.archive-visual {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+
+    max-height: none;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+
+/* POSTER SET */
+
+.archive-visual-set {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    width: 100%;
+}
+
+.archive-visual-set-image {
+    width: 100%;
+    height: auto;
+
+    max-height: none;
+
+    object-fit: contain;
+}
+
+
+/* =========================
+   WRITING
+   ========================= */
+
+.archive-writing {
+    width: 100%;
+
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+
+/* =========================
+   AUDIO
+   ========================= */
+
+.archive-audio-player {
+    width: 100%;
+
+    grid-template-columns:
+        32px
+        1fr
+        auto;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding:
+        14px
+        12px;
+
+    box-sizing: border-box;
+}
+
+.archive-audio-play {
+    font-size: 21px;
+}
+
+.archive-audio-time {
+    min-width: 68px;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   ARCHIVE BLUR FIX - MOBILE
+   ========================= */
+
+.archive-item-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(8, 7, 5, 0.78);
+}
+
+.archive-screen.archive-item-open > .back-control,
+.archive-screen.archive-item-open > .archive-header,
+.archive-screen.archive-item-open > .archive-list {
+    filter: blur(4px);
+}
+
+
+/* MOBILE BACK TEXT */
+
+.back-control span {
+    font-size: 0;
+}
+
+.back-control span::after {
+    content: "Back";
+
+    font-size: 12px;
+    font-family: "Garamond", serif;
+}
+
+
+/* MORE - SCROLL WHOLE WINDOW */
+
+.music-more-window {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+}
+
+.music-more-details {
+    flex: 0 0 auto;
+
+    height: auto;
+    min-height: 0;
+
+    overflow: visible;
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   NARROW + TALL PHONES
+   Galaxy S8+ etc.
+   ========================= */
+
+@media (max-width: 380px) {
+
+    .photos-collection-view {
+        margin-top: 250px;
+    }
+
+    /* COLLECTIONS MAIN PAGE */
+    .photos-collections {
+        margin-top: 255px;
+    }
+
+    .photos-all-grid {
+        margin-top: 270px;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+@media (max-width: 380px) {
+  /* ABOUT */
+  .about-screen .about-text,
+  .about-screen .about-description,
+  .about-screen .about-content {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .about-screen .about-support-text,
+  .about-screen .support-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 36px;
+  }
+
+  .about-screen .support-button,
+  .about-screen .support-link {
+    margin-top: 14px;
+  }
+
+  /* MUSIC */
+  .music-screen .release-title,
+  .music-screen .music-release-title {
+    font-size: 15px;
+    line-height: 1.35;
+    max-width: 90%;
+    margin: 50px auto 0;
+  }
+
+  .music-screen .release-artist,
+  .music-screen .music-release-artist {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .music-screen .listen-button,
+  .music-screen .more-button {
+    min-width: 90px;
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
+/* =========================
+   IPAD AIR - MUSIC
+   ========================= */
+
+@media (min-width: 800px) and (max-width: 830px) and (pointer: coarse) {
+
+    /* YEARS BELOW "MUSIC" */
+
+    .music-filters {
+        top: 84px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        gap: 68px;
+    }
+
+
+    /* CAROUSEL A LITTLE LOWER */
+
+    .music-carousel {
+        top: 35%;
+    }
+
+    .release-button {
+        padding: 7px 17px;
+        font-size: 18px;
+    }
+
+
+/* =========================
+   IPAD AIR - BLUR FIX
+   ========================= */
+
+
+/* LISTEN */
+
+.music-listen-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(20, 12, 10, 0.48);
+}
+
+.music-screen.listen-open > .back-control,
+.music-screen.listen-open > .music-heading,
+.music-screen.listen-open > .music-carousel,
+.music-screen.listen-open > .release-info {
+    filter: blur(4px);
+}
+
+
+/* MORE */
+
+.music-more-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(20, 12, 10, 0.48);
+}
+
+.music-screen.more-open > .back-control,
+.music-screen.more-open > .music-heading,
+.music-screen.more-open > .music-carousel,
+.music-screen.more-open > .release-info {
+    filter: blur(4px);
+}
+
+
+/* =========================
+   IPAD AIR - MORE WINDOW
+   ========================= */
+
+.music-more-window {
+    width: 72vw;
+    height: 82vh;
+
+    display: flex;
+    flex-direction: column;
+
+    grid-template-columns: none;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* BIG COVER ON TOP */
+
+.music-more-cover-area {
+    flex: 0 0 auto;
+
+    padding:
+        55px
+        20px
+        24px;
+}
+
+.music-more-cover {
+    width: 460px;
+    height: 460px;
+
+    max-width: none;
+    max-height: none;
+
+    object-fit: cover;
+}
+
+
+/* INFORMATION BELOW */
+
+.music-more-details {
+    flex: 0 0 auto;
+
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    box-sizing: border-box;
+
+    padding:
+        10px
+        50px
+        55px;
+
+    overflow: visible;
+}
+
+/* =========================
+   IPAD AIR - MENU TOUCH FIX
+   ========================= */
+
+.menu a {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.menu a:hover,
+.menu a:active,
+.menu a:focus {
+    color: #bbb297;
+
+    text-shadow: none;
+
+    transform: none;
+}
+
+/* START SCREEN - BIGGER LOGO */
+
+.logo-image {
+    width: 70vw;
+    min-width: 0;
+    max-width: none;
+}
+
+
+/* =========================
+   IPAD AIR - PHOTOS
+   ========================= */
+
+
+/* TABS BELOW "PHOTOS" */
+
+.photos-tabs {
+    top: 54px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    gap: 64px;
+}
+
+
+/* COLLECTIONS GRID */
+
+.photos-collections {
+    top: 34%;
+    left: 50%;
+
+    width: 68%;
+    height: auto;
+
+    transform: translateX(-50%);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 28px;
+    row-gap: 42px;
+}
+
+
+/* REMOVE DESKTOP ABSOLUTE POSITIONS */
+
+.photo-collection {
+    position: relative;
+
+    left: auto !important;
+    top: auto !important;
+
+    width: 100% !important;
+    height: auto !important;
+}
+
+
+/* PREVIEW IMAGES */
+
+.photo-collection img {
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 3 / 2;
+
+    object-fit: cover;
+
+    opacity: 1;
+    filter: brightness(1);
+}
+
+
+/* SKY CAN STAY A LITTLE TALLER */
+
+.photo-collection[data-collection="sky"] img {
+    aspect-ratio: 4 / 5;
+}
+
+
+/* TOUCH: NO STICKY HOVER */
+
+.photo-collection:hover img {
+    opacity: 1;
+    filter: brightness(1);
+    transform: none;
+}
+
+.photo-collection:hover span {
+    color: #bbb297;
+    text-shadow: none;
+}
+
+
+/* =========================
+   IPAD AIR - ALL PHOTOGRAPHS
+   VERTICAL PINTEREST
+   ========================= */
+
+
+/* PAGE ITSELF CAN SCROLL */
+
+.photos-screen {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* ALL 30 PHOTOS */
+
+.photos-all-grid {
+    top: 31%;
+    left: 50%;
+
+    width: 72%;
+
+    /* IMPORTANT:
+       do NOT limit the height */
+    height: auto;
+
+    transform: translateX(-50%);
+
+    padding:
+        0
+        4px
+        90px;
+
+    box-sizing: border-box;
+
+    /* scrolling now belongs to the whole page */
+    overflow: visible;
+
+    /* Pinterest layout */
+    column-count: 2;
+    column-gap: 12px;
+}
+
+
+/* EACH PHOTO */
+
+.all-photo-item {
+    display: inline-block;
+
+    width: 100%;
+
+    margin:
+        0
+        0
+        12px;
+
+    break-inside: avoid;
+
+    vertical-align: top;
+}
+
+
+/* ORIGINAL PROPORTIONS */
+
+.all-photo-item img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 8px;
+
+    opacity: 1;
+    filter: none;
+
+    transform: none;
+}
+
+
+/* NO STICKY HOVER ON TOUCH */
+
+.all-photo-item:hover img {
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+
+/* =========================
+   IPAD AIR - ALL PHOTOGRAPHS
+   PINTEREST
+   ========================= */
+
+.photos-screen {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.photos-all-grid {
+    top: 31%;
+    left: 50%;
+
+    width: 90%;
+
+    height: auto;
+
+    transform: translateX(-50%);
+
+    padding:
+        0
+        0
+        80px;
+
+    box-sizing: border-box;
+
+    overflow: visible;
+
+    column-count: 2;
+    column-gap: 10px;
+}
+
+.all-photo-item {
+    display: inline-block;
+
+    width: 100%;
+
+    margin:
+        0
+        0
+        10px;
+
+    padding: 0;
+
+    break-inside: avoid;
+
+    vertical-align: top;
+}
+
+.all-photo-item img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 9px;
+
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+.all-photo-item:hover img {
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+
+/* =========================
+   IPAD AIR - OPEN COLLECTION
+   PINTEREST STYLE
+   ========================= */
+
+.photos-collection-view {
+    top: 31%;
+    left: 50%;
+
+    width: 90%;
+    height: auto;
+
+    transform: translateX(-50%);
+}
+
+
+/* BACK LEFT / TITLE RIGHT */
+
+.photos-collection-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin:
+        0
+        0
+        16px;
+
+    padding:
+        0
+        4px;
+
+    box-sizing: border-box;
+}
+
+
+/* BACK BUTTON */
+
+.photos-collection-back {
+    position: static;
+
+    left: auto;
+    top: auto;
+
+    margin: 0;
+
+    transform: none;
+}
+
+
+/* COLLECTION NAME */
+
+.photos-collection-title {
+    margin: 0;
+
+    font-size: 27px;
+
+    text-align: right;
+}
+
+
+/* PINTEREST PHOTO GRID */
+
+.photos-collection-grid {
+    width: 100%;
+    height: auto;
+
+    padding:
+        0
+        0
+        80px;
+
+    box-sizing: border-box;
+
+    overflow: visible;
+
+    column-count: 2;
+    column-gap: 10px;
+}
+
+
+/* PHOTO SPACING */
+
+.photos-collection-grid .all-photo-item {
+    display: inline-block;
+
+    width: 100%;
+
+    margin:
+        0
+        0
+        10px;
+
+    break-inside: avoid;
+
+    vertical-align: top;
+}
+
+
+/* KEEP ORIGINAL PHOTO PROPORTIONS */
+
+.photos-collection-grid .all-photo-item img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 9px;
+
+    opacity: 1;
+    filter: none;
+
+    transform: none;
+}
+
+
+/* NO STICKY TOUCH HOVER */
+
+.photos-collection-grid .all-photo-item:hover img {
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+
+/* PHOTO VIEWER - ARROWS */
+
+.photo-viewer-arrow {
+    padding: 4px;
+}
+
+.photo-viewer-arrow img {
+    width: 20px;
+    height: 20px;
+}
+
+.photo-viewer-prev {
+    left: 12px;
+}
+
+.photo-viewer-next {
+    right: 12px;
+}
+
+/* PHOTO VIEWER - BLUR FIX */
+
+.photo-viewer {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(8, 5, 4, 0.78);
+}
+
+.photos-screen.viewer-open > .back-control,
+.photos-screen.viewer-open > .photos-header,
+.photos-screen.viewer-open > .photos-collections,
+.photos-screen.viewer-open > .photos-all-grid,
+.photos-screen.viewer-open > .photos-collection-view {
+    filter: blur(5px);
+}
+
+
+/* =========================
+   IPAD AIR - ARCHIVE VISUAL
+   ========================= */
+
+.archive-item-window {
+    width: 76vw;
+    max-height: 82vh;
+
+    padding:
+        55px
+        55px
+        50px;
+}
+
+
+/* SINGLE VISUAL */
+
+.archive-visual:not(.archive-visual-set-image) {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: 48vh;
+
+    margin:
+        0
+        auto;
+
+    object-fit: contain;
+}
+
+
+/* =========================
+   IPAD AIR - ARCHIVE POSTER SET
+   ========================= */
+
+.archive-visual-set {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+/* LARGE POSTERS ONE BELOW ANOTHER */
+
+.archive-visual-set-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: none;
+    max-height: none;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+
+/* =========================
+   IPAD AIR - ARCHIVE BLUR FIX
+   ========================= */
+
+.archive-item-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(8, 7, 5, 0.72);
+}
+
+
+/* BLUR THE ARCHIVE PAGE ITSELF INSTEAD */
+
+.archive-screen:has(.archive-item-overlay.open) > .back-control,
+.archive-screen:has(.archive-item-overlay.open) > .archive-header,
+.archive-screen:has(.archive-item-overlay.open) > .archive-list {
+    filter: blur(4px);
+}
+
+
+
+/* IPAD AIR - BACK LABEL */
+
+.back-control span {
+    font-size: 0;
+}
+
+.back-control span::after {
+    content: "Back";
+    font-size: 12px;
+}
+
+
+}
+
+.photo-viewer-image {
+    touch-action: pan-y pinch-zoom;
+
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+
+/* =========================
+   TOUCH DEVICES - PHOTO VIEWER BLUR FIX
+   ========================= */
+
+@media (max-width: 900px) and (pointer: coarse) {
+
+    .photo-viewer {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+
+        background: rgba(8, 5, 4, 0.88);
+    }
+
+
+    .photos-screen.viewer-open > .back-control,
+    .photos-screen.viewer-open > .photos-header,
+    .photos-screen.viewer-open > .photos-collections,
+    .photos-screen.viewer-open > .photos-all-grid,
+    .photos-screen.viewer-open > .photos-collection-view {
+        filter: blur(5px);
+    }
+
+}
+
+
+
+
+
+/* =========================
+   IPAD PRO ONLY
+   ========================= */
+
+@media (width: 1024px) and (pointer: coarse) {
+
+    .logo-image {
+        width: 60vw;
+        min-width: 0;
+        max-width: none;
+    }
+
+
+    .menu a {
+        font-size: 53px;
+    }
+
+
+/* MUSIC - IPAD PRO */
+
+.music-heading {
+    top: 18%;
+    left: 13%;
+    width: 74%;
+}
+
+.music-heading h2 {
+    font-size: 44px;
+}
+
+
+/* All / years BELOW Music */
+
+.music-filters {
+    top: 72px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: max-content;
+
+    gap: 58px;
+}
+
+
+/* Bigger carousel + arrows together */
+
+.music-carousel {
+    top: 33%;
+
+    transform:
+        translateX(-50%)
+        scale(1.18);
+
+    transform-origin: center center;
+}
+
+
+/* Release info */
+
+.release-info {
+    top: 65%;
+}
+
+
+/* Bigger Listen / More */
+
+.release-actions {
+    gap: 70px;
+    margin-top: 32px;
+}
+
+.release-button {
+    padding: 7px 17px;
+    font-size: 21px;
+}
+
+
+/* REMOVE STICKY HOVER ON IPAD PRO */
+
+.menu a:hover {
+    color: #bbb297;
+    text-shadow: none;
+    transform: none;
+}
+
+/* MUSIC MORE - BLUR FIX */
+
+.music-more-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(20, 12, 10, 0.48);
+}
+
+.music-screen.more-open > .back-control,
+.music-screen.more-open > .music-heading,
+.music-screen.more-open > .music-carousel,
+.music-screen.more-open > .release-info {
+    filter: blur(4px);
+}
+
+
+/* MUSIC LISTEN - BLUR FIX */
+
+.music-listen-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(20, 12, 10, 0.48);
+}
+
+.music-screen.listen-open > .back-control,
+.music-screen.listen-open > .music-heading,
+.music-screen.listen-open > .music-carousel,
+.music-screen.listen-open > .release-info {
+    filter: blur(4px);
+}
+
+
+/* =========================
+   IPAD PRO - PHOTOS
+   ========================= */
+
+.photos-header {
+    top: 18%;
+    left: 13%;
+    width: 74%;
+}
+
+.photos-header h2 {
+    font-size: 44px;
+}
+
+
+/* TABS BELOW PHOTOS */
+
+.photos-tabs {
+    top: 70px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    gap: 72px;
+}
+
+
+/* COLLECTIONS - 2 x 2 */
+
+.photos-collections {
+    top: 34%;
+    left: 50%;
+
+    width: 72%;
+    height: auto;
+
+    transform: translateX(-50%);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 32px;
+    row-gap: 44px;
+}
+
+
+/* REMOVE OLD DESKTOP POSITIONS */
+
+.photo-collection {
+    position: relative;
+
+    left: auto !important;
+    top: auto !important;
+
+    width: 100% !important;
+    height: auto !important;
+}
+
+
+/* CLEAN PREVIEWS */
+
+.photo-collection img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 3 / 2;
+
+    object-fit: cover;
+
+    opacity: 1;
+    filter: brightness(1);
+
+    transform: none;
+}
+
+
+/* SKY A LITTLE TALLER */
+
+.photo-collection[data-collection="sky"] img {
+    aspect-ratio: 4 / 5;
+}
+
+
+/* LABELS */
+
+.photo-collection span {
+    margin-top: 8px;
+    font-size: 25px;
+}
+
+
+/* REMOVE STICKY TOUCH HOVER */
+
+.photo-collection:hover img {
+    opacity: 1;
+    filter: brightness(1);
+    transform: none;
+}
+
+.photo-collection:hover span {
+    color: #bbb297;
+    text-shadow: none;
+}
+
+/* =========================
+   IPAD PRO - ALL PHOTOGRAPHS
+   PINTEREST
+   ========================= */
+
+.photos-screen {
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.photos-all-grid {
+    top: 31%;
+    left: 50%;
+
+    width: 90%;
+    height: auto;
+
+    transform: translateX(-50%);
+
+    padding:
+        0
+        0
+        80px;
+
+    box-sizing: border-box;
+
+    overflow: visible;
+
+    column-count: 2;
+    column-gap: 12px;
+}
+
+
+/* EACH PHOTO */
+
+.photos-all-grid .all-photo-item {
+    display: inline-block;
+
+    width: 100%;
+
+    margin:
+        0
+        0
+        12px;
+
+    padding: 0;
+
+    break-inside: avoid;
+
+    vertical-align: top;
+}
+
+
+/* KEEP ORIGINAL PROPORTIONS */
+
+.photos-all-grid .all-photo-item img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 9px;
+
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+
+/* NO STICKY TOUCH HOVER */
+
+.photos-all-grid .all-photo-item:hover img {
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+/* =========================
+   IPAD PRO - OPEN COLLECTION
+   PINTEREST
+   ========================= */
+
+.photos-collection-view {
+    top: 31%;
+    left: 50%;
+
+    width: 90%;
+    height: auto;
+
+    transform: translateX(-50%);
+}
+
+
+/* HEADER INSIDE COLLECTION */
+
+.photos-collection-header {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 0 0 16px;
+
+    padding: 0 4px;
+
+    box-sizing: border-box;
+}
+
+
+/* BACK LEFT */
+
+.photos-collection-back {
+    position: static;
+
+    left: auto;
+    top: auto;
+
+    margin: 0;
+
+    transform: none;
+}
+
+
+/* COLLECTION TITLE RIGHT */
+
+.photos-collection-title {
+    margin: 0;
+
+    font-size: 27px;
+
+    text-align: right;
+}
+
+
+/* 2-COLUMN PINTEREST GRID */
+
+.photos-collection-grid {
+    width: 100%;
+    height: auto;
+
+    padding: 0 0 80px;
+
+    box-sizing: border-box;
+
+    overflow: visible;
+
+    column-count: 2;
+    column-gap: 12px;
+}
+
+
+/* EACH PHOTO */
+
+.photos-collection-grid .all-photo-item {
+    display: inline-block;
+
+    width: 100%;
+
+    margin: 0 0 12px;
+
+    padding: 0;
+
+    break-inside: avoid;
+
+    vertical-align: top;
+}
+
+
+/* KEEP ORIGINAL PHOTO SHAPE */
+
+.photos-collection-grid .all-photo-item img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 9px;
+
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+
+/* NO TOUCH HOVER */
+
+.photos-collection-grid .all-photo-item:hover img {
+    opacity: 1;
+    filter: none;
+    transform: none;
+}
+
+/* =========================
+   IPAD PRO - PHOTO VIEWER BLUR FIX
+   ========================= */
+
+.photo-viewer {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(8, 5, 4, 0.78);
+}
+
+
+/* BLUR THE PHOTOS PAGE ITSELF */
+
+.photos-screen.viewer-open > .back-control,
+.photos-screen.viewer-open > .photos-header,
+.photos-screen.viewer-open > .photos-collections,
+.photos-screen.viewer-open > .photos-all-grid,
+.photos-screen.viewer-open > .photos-collection-view {
+    filter: blur(5px);
+}
+
+/* =========================
+   IPAD PRO - ARCHIVE BLUR FIX
+   ========================= */
+
+.archive-item-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    background: rgba(8, 7, 5, 0.72);
+}
+
+.archive-screen:has(.archive-item-overlay.open) > .back-control,
+.archive-screen:has(.archive-item-overlay.open) > .archive-header,
+.archive-screen:has(.archive-item-overlay.open) > .archive-list {
+    filter: blur(4px);
+}
+
+
+/* =========================
+   IPAD PRO - ARCHIVE POSTER SET
+   ========================= */
+
+.archive-visual-set {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+.archive-visual-set-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: none;
+    max-height: none;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+/* IPAD PRO - BACK LABEL */
+
+.back-control span {
+    font-size: 0;
+}
+
+.back-control span::after {
+    content: "Back";
+    font-size: 12px;
+}
+
+}

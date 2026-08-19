@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oisin Ocean</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="start-screen">
+        <img class="logo-image" src="images/logo.png" alt="Oisin Ocean">
+        <p class="enter-text">press anywhere to enter</p>
+    </main>
+
+    <main class="main-menu">
+
+    <img class="menu-logo" src="images/logo.png" alt="Oisin Ocean">
+
+    <nav class="menu">
+    <a href="#" id="about-link"
+       data-description="Learn more about Oisin Ocean.">About</a>
+
+    <a href="#"
+       id="music-link"
+       data-description="Listen to the recordings.">Music</a>
+
+    <a href="#"
+       id="photos-link"
+       data-description="Look through the photographs.">Photos</a>
+
+    <a href="#"
+       id="archive-link"
+       data-description="Enter the archive.">Archive</a>
+</nav>
+
+<p class="menu-description"></p>
+
+<button
+    class="sound-toggle"
+    id="sound-toggle"
+    type="button"
+    aria-label="Turn sound off"
+>
+    <svg
+        class="sound-speaker"
+        viewBox="0 0 64 64"
+        aria-hidden="true"
+    >
+        <!-- Speaker -->
+        <path
+            class="speaker-body"
+            d="M7 25 H19 L33 14 V50 L19 39 H7 Z"
+        />
+
+        <!-- Small wave -->
+        <path
+            class="sound-wave"
+            d="M39 25 C43 29 43 35 39 39"
+        />
+
+        <!-- Middle wave -->
+        <path
+            class="sound-wave"
+            d="M46 19 C53 26 53 38 46 45"
+        />
+
+        <!-- Large wave -->
+        <path
+            class="sound-wave"
+            d="M53 13 C64 24 64 40 53 51"
+        />
+    </svg>
+
+    <span class="sound-off-mark">×</span>
+</button>
+
+</main>
+
+<section class="about-screen">
+
+    <button class="back-control" id="about-back" type="button" aria-label="Back to main menu">
+        <img src="images/arrow.png" alt="">
+        <span>Esc / Backspace</span>
+    </button>
+
+    <div class="about-content">
+        <h2>About</h2>
+
+        <p class="about-text">
+            Oisin Ocean is a music project by musician and visual artist Alex Sharkov.
+            All aspects of the project are created and handled by him.
+            The project began in 2023 and is currently based in Europe.
+            On this website, you can find Oisin Ocean's music, photographs,
+            unreleased material, and more. Thank you for visiting the site.
+        </p>
+    </div>
+
+    <div class="support-area">
+        <p>If you would like to support Oisin Ocean, you can do so here.</p>
+
+        <button
+            class="support-button"
+            id="support-open"
+            type="button"
+        >
+            Support Oisin Ocean
+        </button>
+    </div>
+
+
+    <div class="support-overlay" aria-hidden="true">
+
+        <div class="support-window">
+
+            <button
+                class="support-close"
+                type="button"
+                aria-label="Close support window"
+            >
+                X
+            </button>
+
+            <iframe
+                id="kofiframe"
+                src="https://ko-fi.com/oisinocean/?hidefeed=true&widget=true&embed=true&preview=true"
+                title="Support Oisin Ocean"
+            ></iframe>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="music-screen">
+
+    <button class="back-control" id="music-back" type="button" aria-label="Back to main menu">
+        <img src="images/arrow.png" alt="">
+        <span>Esc / Backspace</span>
+    </button>
+
+    <div class="music-heading">
+        <h2>Music</h2>
+
+        <div class="music-filters">
+            <button class="music-filter active" data-year="all">All</button>
+            <button class="music-filter" data-year="2024">2024</button>
+            <button class="music-filter" data-year="2025">2025</button>
+            <button class="music-filter" data-year="2026">2026</button>
+        </div>
+    </div>
+
+    <div class="music-carousel">
+
+        <button class="carousel-arrow carousel-arrow-left" type="button" aria-label="Previous release">
+            <img src="images/arrow.png" alt="">
+        </button>
+
+        <div class="cover-stage">
+
+            
+            
+
+            <img
+                class="music-cover music-cover-far-prev"
+                alt=""
+            >
+            <img
+                class="music-cover music-cover-prev"
+                src="images/whereigo.png"
+                alt=""
+            >
+
+            <img
+                class="music-cover music-cover-current"
+                src="images/allegory.jpg"
+                alt="allegory for those who can't stand out"
+            >
+
+            <img
+                class="music-cover music-cover-next"
+                src="images/flicker.jpg"
+                alt=""
+            >
+
+            <img
+                class="music-cover music-cover-far-next"
+                alt=""
+            >
+
+
+
+        </div>
+
+        <button class="carousel-arrow carousel-arrow-right" type="button" aria-label="Next release">
+            <img src="images/arrow.png" alt="">
+        </button>
+
+    </div>
+
+    <div class="release-info">
+        <p class="release-title">
+            allegory for those who can't stand out (single)
+        </p>
+
+        <p class="release-artist">
+            Oisin Ocean
+        </p>
+
+        <div class="release-actions">
+            <button class="release-button listen-button" type="button">
+                Listen
+            </button>
+
+            <button class="release-button more-button" type="button">
+                More
+            </button>
+        </div>
+    </div>
+
+    <div class="music-more-overlay" aria-hidden="true">
+
+    <div
+        class="music-more-window"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Release information"
+    >
+
+        <button
+            class="music-more-close"
+            type="button"
+            aria-label="Close"
+        >
+            X
+        </button>
+
+        <div class="music-more-cover-area">
+            <img
+                class="music-more-cover"
+                src=""
+                alt=""
+            >
+        </div>
+
+        <div class="music-more-details">
+
+            <section class="more-section">
+                <h3>Title:</h3>
+                <p class="more-title"></p>
+            </section>
+
+            <section class="more-section more-credits-section">
+                <h3>Credits:</h3>
+                <p class="more-credits"></p>
+            </section>
+
+            <section class="more-section more-story-section">
+                <h3>Story:</h3>
+                <p class="more-story"></p>
+            </section>
+
+            <section class="more-section more-tracklist-section">
+                <h3>Tracklist:</h3>
+
+                <ol class="more-tracklist"></ol>
+            </section>
+
+
+            <section class="more-section more-track-lyrics-section">
+
+                <div class="more-track-lyrics"></div>
+
+            </section>
+            
+            <section class="more-section more-lyrics-section">
+                <h3>Lyrics:</h3>
+                <p class="more-lyrics"></p>
+            </section>
+
+            <section class="more-section more-release-date-section">
+                <h3>Release date:</h3>
+                <p class="more-release-date"></p>
+            </section>
+
+            <section class="more-section more-related-section">
+                <h3>Related material:</h3>
+                <div class="more-related"></div>
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     LISTEN WINDOW
+     ========================= -->
+
+<div class="music-listen-overlay" aria-hidden="true">
+
+    <div
+        class="music-listen-window"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Listen to release"
+    >
+
+        <button
+            class="music-listen-close"
+            type="button"
+            aria-label="Close"
+        >
+            X
+        </button>
+
+        <h3 class="music-listen-title">
+            Listen to this song on:
+        </h3>
+
+        <div class="music-listen-platforms"></div>
+
+    </div>
+
+</div>
+
+</section>
+
+<section class="photos-screen">
+
+    <button class="back-control" id="photos-back" type="button" aria-label="Back to main menu">
+        <img src="images/arrow.png" alt="">
+        <span>Esc / Backspace</span>
+    </button>
+
+    <div class="photos-header">
+
+        <h2>Photos</h2>
+
+        <div class="photos-tabs">
+            <button class="photos-tab active" data-view="collections">
+                Collections
+            </button>
+
+            <button class="photos-tab" data-view="all">
+                All photographs
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="photos-collections">
+
+        <button class="photo-collection" data-collection="woods">
+            <img src="images/photos/forest2.jpg" alt="">
+            <span>Woods</span>
+        </button>
+
+
+        <button class="photo-collection" data-collection="evenings">
+            <img src="images/photos/sunlake.jpg" alt="">
+            <span>Evenings</span>
+        </button>
+
+
+        <button class="photo-collection" data-collection="sky">
+            <img src="images/photos/sky2.jpg" alt="">
+            <span>Sky</span>
+        </button>
+
+
+        <button class="photo-collection" data-collection="human-traces">
+            <img src="images/photos/oldhouse.jpg" alt="">
+            <span>Human Traces</span>
+        </button>
+
+    </div>
+
+<div class="photos-all-grid"></div>
+
+
+<!-- OPEN COLLECTION -->
+
+<div class="photos-collection-view">
+
+    <div class="photos-collection-header">
+        <button
+            class="photos-collection-back"
+            type="button"
+            aria-label="Back to collections"
+        >
+            <img src="images/arrow.png" alt="">
+            <span>Back</span>
+        </button>
+
+        <h3 class="photos-collection-title"></h3>
+    </div>
+
+    <div class="photos-collection-grid"></div>
+
+</div>
+
+
+<!-- PHOTO VIEWER -->
+
+<div class="photo-viewer" aria-hidden="true">
+
+    <button
+        class="photo-viewer-close"
+        type="button"
+        aria-label="Close photograph"
+    >
+        X
+    </button>
+
+    <button
+        class="photo-viewer-arrow photo-viewer-prev"
+        type="button"
+        aria-label="Previous photograph"
+    >
+        <img src="images/arrow.png" alt="">
+    </button>
+
+    <img
+        class="photo-viewer-image"
+        src=""
+        alt=""
+    >
+
+    <button
+        class="photo-viewer-arrow photo-viewer-next"
+        type="button"
+        aria-label="Next photograph"
+    >
+        <img src="images/arrow.png" alt="">
+    </button>
+
+    <p class="photo-viewer-counter"></p>
+
+</div>
+
+</section>
+
+
+<section class="archive-screen">
+
+    <button
+        class="back-control"
+        id="archive-back"
+        type="button"
+        aria-label="Back to main menu"
+    >
+        <img src="images/arrow.png" alt="">
+        <span>Esc / Backspace</span>
+    </button>
+
+    <div class="archive-header">
+
+        <h2>Archive</h2>
+
+        <div class="archive-filters">
+            <button class="archive-filter active" data-type="all">All</button>
+            <button class="archive-filter" data-type="visual">Visual</button>
+            <button class="archive-filter" data-type="writing">Writing</button>
+            <button class="archive-filter" data-type="audio">Audio</button>
+        </div>
+
+    </div>
+
+    <div class="archive-list"></div>
+
+<div class="archive-item-overlay" aria-hidden="true">
+
+    <div class="archive-item-window">
+
+        <button
+            class="archive-item-close"
+            type="button"
+            aria-label="Close archive item"
+        >
+            X
+        </button>
+
+        <div class="archive-item-meta">
+            <span class="archive-item-code"></span>
+            <span class="archive-item-type"></span>
+            <span class="archive-item-year"></span>
+        </div>
+
+        <h3 class="archive-item-title"></h3>
+
+        <p class="archive-item-description"></p>
+
+        <div class="archive-item-content"></div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+    <div class="fade-overlay"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
