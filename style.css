@@ -5314,8 +5314,33 @@ backdrop-filter: blur(4px);
     /* MUSIC */
 
     .release-info {
-        top: 80%;
+        top: 82%;
     }
+
+    /* MUSIC - MORE WINDOW */
+
+    .music-more-window {
+        width: min(76vw, 1060px);
+        grid-template-columns: 46% 54%;
+    }
+
+    .music-more-cover-area {
+        padding: 55px 28px;
+    }
+
+    .music-more-cover {
+        width: min(31vw, 400px);
+        max-height: 58vh;
+    }
+
+    .music-more-details {
+        padding:
+            70px
+            38px
+            60px
+            30px;
+    }
+
 
 
     /* PHOTOS */
@@ -5334,5 +5359,95 @@ backdrop-filter: blur(4px);
         width: 280px;
         height: 185px;
     }
+
+
+    /* =========================
+   PHOTOS - ALL PHOTOGRAPHS
+   ========================= */
+
+.photos-all-grid {
+    width: min(82vw, 1180px);
+    height: 56vh;
+
+    column-count: 5;
+    column-gap: 14px;
+
+    padding:
+        6px
+        12px
+        50px
+        6px;
+}
+
+.photos-all-grid .all-photo-item {
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   PHOTOS - OPEN COLLECTION
+   ========================= */
+
+.photos-collection-view {
+    top: 32%;
+
+    width: min(82vw, 1180px);
+    height: 58vh;
+}
+
+
+/* BACK + COLLECTION NAME */
+
+.photos-collection-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin: 0 0 14px;
+    padding: 0 6px;
+
+    box-sizing: border-box;
+}
+
+
+.photos-collection-back {
+    position: static;
+
+    left: auto;
+    top: auto;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+
+.photos-collection-title {
+    margin: 0;
+
+    font-size: 24px;
+    text-align: right;
+}
+
+
+/* PHOTOS INSIDE COLLECTION */
+
+.photos-collection-grid {
+    height: calc(100% - 42px);
+
+    column-count: 5;
+    column-gap: 14px;
+
+    padding:
+        4px
+        12px
+        50px
+        4px;
+}
+
+
 
 }
