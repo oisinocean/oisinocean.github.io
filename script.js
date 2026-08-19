@@ -54,10 +54,19 @@ function playSound(sound) {
 
     if (!soundEnabled) return;
 
+    /*
+       Если браузер ещё не успел получить
+       достаточно аудио — НЕ ставим звук в очередь.
+       Просто пропускаем его.
+    */
+    if (sound.readyState < 2) {
+        return;
+    }
+
     sound.currentTime = 0;
 
     sound.play().catch(() => {
-        // Browser may block audio before the first user interaction.
+        // Ignore playback errors.
     });
 }
 
@@ -170,6 +179,7 @@ function enterSite() {
     setTimeout(() => {
         startScreen.style.display = "none";
         mainMenu.style.display = "block";
+        preloadMusicCoversInBackground();
         fadeOverlay.classList.remove("active");
     }, 600);
 }
@@ -214,12 +224,6 @@ if (
 }
 
 
-// Keyboard for desktop
-document.addEventListener(
-    "keydown",
-    enterSite
-);
-
 
 // Keyboard for desktop
 document.addEventListener(
@@ -249,6 +253,8 @@ musicLink.addEventListener("click", (event) => {
     setTimeout(() => {
         mainMenu.style.display = "none";
         musicScreen.style.display = "block";
+
+        renderMusicCarousel();
 
         fadeOverlay.classList.remove("active");
     }, 600);
@@ -1086,9 +1092,14 @@ cuz ive been here before`,
 }
 ];
 
+let musicCoversPreloadStarted = false;
+
+
 function preloadMusicImage(src) {
+
     const img = new Image();
 
+    img.decoding = "async";
     img.src = src;
 
     if (img.decode) {
@@ -1096,9 +1107,39 @@ function preloadMusicImage(src) {
     }
 }
 
-musicReleases.forEach((release) => {
-    preloadMusicImage(release.image);
-});
+
+function preloadMusicCoversInBackground() {
+
+    if (musicCoversPreloadStarted) return;
+
+    musicCoversPreloadStarted = true;
+
+
+    const startPreloading = () => {
+
+        musicReleases.forEach((release) => {
+            preloadMusicImage(release.image);
+        });
+
+    };
+
+
+    if ("requestIdleCallback" in window) {
+
+        requestIdleCallback(
+            startPreloading,
+            { timeout: 1500 }
+        );
+
+    } else {
+
+        setTimeout(
+            startPreloading,
+            300
+        );
+
+    }
+}
 
 const farPrevCover = document.querySelector(".music-cover-far-prev");
 const prevCover = document.querySelector(".music-cover-prev");
@@ -1215,15 +1256,59 @@ function getCurrentRelease() {
 }
 
 function setCoverImage(cover, release) {
-    if (release) {
-        cover.src = release.image;
-        cover.alt = release.title;
-        cover.style.visibility = "visible";
-    } else {
+
+    if (!release) {
         cover.removeAttribute("src");
         cover.alt = "";
         cover.style.visibility = "hidden";
+        return;
     }
+
+    const newSrc = release.image;
+
+    cover.alt = release.title;
+
+
+    // If this exact image is already loaded,
+    // show it immediately.
+    if (
+        cover.getAttribute("src") === newSrc &&
+        cover.complete &&
+        cover.naturalWidth > 0
+    ) {
+        cover.style.visibility = "visible";
+        return;
+    }
+
+
+    // Do not leave the previous cover visible
+    // while the next one is still loading.
+    cover.style.visibility = "hidden";
+
+
+    cover.onload = () => {
+
+        if (
+            cover.getAttribute("src") === newSrc
+        ) {
+            cover.style.visibility = "visible";
+        }
+
+    };
+
+
+    cover.onerror = () => {
+
+        if (
+            cover.getAttribute("src") === newSrc
+        ) {
+            cover.style.visibility = "hidden";
+        }
+
+    };
+
+
+    cover.src = newSrc;
 }
 
 function setCarouselArrowState(button, disabled) {
@@ -1847,7 +1932,6 @@ moreOverlay.addEventListener(
 
 
 
-renderMusicCarousel();
 
 
 
@@ -2166,12 +2250,9 @@ function createPhotoButton(fileName, photoList) {
     const image =
         document.createElement("img");
 
-    image.src =
-        `images/photos/${fileName}`;
-
-    image.alt = "";
-
     image.loading = "lazy";
+    image.alt = "";
+    image.src = `images/photos/${fileName}`;
 
 
     button.appendChild(image);
