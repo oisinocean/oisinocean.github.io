@@ -5311,36 +5311,90 @@ backdrop-filter: blur(4px);
     and (hover: hover)
     and (pointer: fine) {
 
-    /* MUSIC */
+    /* =========================
+   MUSIC - LAPTOP
+   ========================= */
 
-    .release-info {
-        top: 82%;
-    }
 
-    /* MUSIC - MORE WINDOW */
+/* FILTERS: All / 2024 / 2025 / 2026 */
 
-    .music-more-window {
-        width: min(76vw, 1060px);
-        grid-template-columns: 46% 54%;
-    }
+.music-filters {
+    gap: 58px;
+}
 
-    .music-more-cover-area {
-        padding: 55px 28px;
-    }
+.music-filter {
+    font-size: 17px;
+    padding: 3px 8px;
+}
 
-    .music-more-cover {
-        width: min(31vw, 400px);
-        max-height: 58vh;
-    }
 
-    .music-more-details {
-        padding:
-            70px
-            38px
-            60px
-            30px;
-    }
+/* WHOLE CAROUSEL */
 
+.music-carousel {
+    top: 31%;
+
+    transform:
+        translateX(-50%)
+        scale(0.88);
+
+    transform-origin: center top;
+}
+
+
+/* TITLE + ARTIST + BUTTONS */
+
+.release-info {
+    top: 75%;
+    width: 620px;
+}
+
+.release-title {
+    font-size: 17px;
+    line-height: 1.2;
+}
+
+.release-artist {
+    margin-top: 4px;
+    font-size: 16px;
+}
+
+
+/* LISTEN + MORE */
+
+.release-actions {
+    gap: 62px;
+    margin-top: 26px;
+}
+
+.release-button {
+    padding: 3px 10px;
+    font-size: 17px;
+}
+
+
+/* MUSIC - MORE WINDOW */
+
+.music-more-window {
+    width: min(76vw, 1060px);
+    grid-template-columns: 46% 54%;
+}
+
+.music-more-cover-area {
+    padding: 55px 28px;
+}
+
+.music-more-cover {
+    width: min(31vw, 400px);
+    max-height: 58vh;
+}
+
+.music-more-details {
+    padding:
+        70px
+        38px
+        60px
+        30px;
+}
 
 
     /* PHOTOS */
@@ -5435,19 +5489,91 @@ backdrop-filter: blur(4px);
 
 /* PHOTOS INSIDE COLLECTION */
 
-.photos-collection-grid {
-    height: calc(100% - 42px);
+/* PHOTOS INSIDE COLLECTION - 2 HORIZONTAL ROWS */
 
-    column-count: 5;
-    column-gap: 14px;
+.photos-collection-grid {
+    height: 374px;
+
+    display: grid;
+
+    grid-template-rows:
+        repeat(2, 180px);
+
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+
+    column-count: unset;
+
+    gap: 14px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
 
     padding:
         4px
         12px
-        50px
+        16px
         4px;
+
+    box-sizing: border-box;
 }
 
+
+/* EACH PHOTO */
+
+.photos-collection-grid .all-photo-item {
+    width: auto;
+    height: 180px;
+
+    margin: 0;
+}
+
+
+/* KEEP ORIGINAL PHOTO PROPORTIONS */
+
+.photos-collection-grid .all-photo-item img {
+    display: block;
+
+    width: auto;
+    height: 100%;
+
+    max-width: none;
+
+    object-fit: contain;
+}
+
+
+
+
+/* =========================
+   ARCHIVE - LAPTOP
+   ========================= */
+
+
+/* SINGLE SQUARE VISUALS ONLY */
+
+.archive-item-window:has(
+    .archive-visual:not(.archive-visual-set-image)
+) {
+    width: min(62vw, 760px);
+
+    padding:
+        50px
+        55px
+        55px;
+}
+
+
+/* WRITING ONLY */
+
+.archive-item-window:has(.archive-writing) {
+    width: min(64vw, 800px);
+
+    padding:
+        50px
+        55px
+        55px;
+}
 
 
 }
