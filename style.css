@@ -5396,6 +5396,11 @@ backdrop-filter: blur(4px);
         30px;
 }
 
+.release-title,
+.release-artist {
+    transform: translateY(6px);
+}
+
 
     /* PHOTOS */
 
@@ -5487,24 +5492,18 @@ backdrop-filter: blur(4px);
 }
 
 
-/* PHOTOS INSIDE COLLECTION */
-
-/* PHOTOS INSIDE COLLECTION - 2 HORIZONTAL ROWS */
+/* =========================
+   PHOTOS COLLECTION - LAPTOP MASONRY
+   ========================= */
 
 .photos-collection-grid {
     height: 374px;
 
-    display: grid;
+    display: block;
 
-    grid-template-rows:
-        repeat(2, 180px);
-
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-
-    column-count: unset;
-
-    gap: 14px;
+    column-count: 5;
+    column-gap: 14px;
+    column-fill: auto;
 
     overflow-x: auto;
     overflow-y: hidden;
@@ -5522,20 +5521,30 @@ backdrop-filter: blur(4px);
 /* EACH PHOTO */
 
 .photos-collection-grid .all-photo-item {
-    width: auto;
-    height: 180px;
+    display: inline-block;
 
-    margin: 0;
+    width: 100%;
+    height: auto;
+
+    margin:
+        0
+        0
+        14px;
+
+    padding: 0;
+
+    break-inside: avoid;
+    vertical-align: top;
 }
 
 
-/* KEEP ORIGINAL PHOTO PROPORTIONS */
+/* PRESERVE REAL PHOTO PROPORTIONS */
 
 .photos-collection-grid .all-photo-item img {
     display: block;
 
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
 
     max-width: none;
 
