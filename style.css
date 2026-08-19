@@ -5281,3 +5281,58 @@ backdrop-filter: blur(4px);
 }
 
 }
+
+
+
+
+/* =========================
+   PHOTO VIEWER - LOCK TOUCH SCROLL
+   ========================= */
+
+.photos-screen.viewer-open {
+    overflow: hidden !important;
+    touch-action: none !important;
+    -webkit-overflow-scrolling: auto;
+}
+
+.photo-viewer-image {
+    touch-action: none;
+}
+
+
+
+/* =========================
+   LAPTOP / SHORT DESKTOP
+   ========================= */
+
+@media
+    (min-width: 1000px)
+    and (max-height: 820px)
+    and (hover: hover)
+    and (pointer: fine) {
+
+    /* MUSIC */
+
+    .release-info {
+        top: 80%;
+    }
+
+
+    /* PHOTOS */
+
+    .photo-collection[data-collection="sky"] {
+        top: 62%;
+
+        width: 165px;
+        height: 200px;
+    }
+
+
+    .photo-collection[data-collection="human-traces"] {
+        top: 58%;
+
+        width: 280px;
+        height: 185px;
+    }
+
+}

@@ -50,24 +50,120 @@ sectionEnterSound.volume = 0.4;
 popSound.volume = 0.25;
 backSound.volume = 0.4;
 
+const soundCancelTimers = new WeakMap();
+
+
 function playSound(sound) {
 
     if (!soundEnabled) return;
 
+
+    // Cancel an old timeout for this sound.
+    const oldTimer =
+        soundCancelTimers.get(sound);
+
+    if (oldTimer) {
+        clearTimeout(oldTimer);
+        soundCancelTimers.delete(sound);
+    }
+
+
+    // Restart this UI sound from the beginning.
+    sound.pause();
+
+    try {
+        sound.currentTime = 0;
+    } catch (error) {
+        // Ignore seek errors while media is still loading.
+    }
+
+
     /*
-       Если браузер ещё не успел получить
-       достаточно аудио — НЕ ставим звук в очередь.
-       Просто пропускаем его.
+       IMPORTANT:
+       We call play() even if the sound is not loaded yet.
+       This is important for iPhone / Safari.
     */
-    if (sound.readyState < 2) {
+    const playPromise = sound.play();
+
+
+    if (
+        !playPromise ||
+        typeof playPromise.then !== "function"
+    ) {
         return;
     }
 
-    sound.currentTime = 0;
 
-    sound.play().catch(() => {
-        // Ignore playback errors.
-    });
+    let started = false;
+
+
+    /*
+       If playback actually begins,
+       keep it playing normally.
+    */
+    playPromise
+        .then(() => {
+
+            started = true;
+
+            const timer =
+                soundCancelTimers.get(sound);
+
+            if (timer) {
+                clearTimeout(timer);
+                soundCancelTimers.delete(sound);
+            }
+
+        })
+        .catch(() => {
+
+            const timer =
+                soundCancelTimers.get(sound);
+
+            if (timer) {
+                clearTimeout(timer);
+                soundCancelTimers.delete(sound);
+            }
+
+        });
+
+
+    /*
+       But if the browser still hasn't started
+       the sound after 700 ms, cancel it.
+       This prevents old sounds from suddenly
+       playing several seconds later.
+    */
+    const cancelTimer =
+        setTimeout(() => {
+
+            if (!started) {
+
+                sound.pause();
+
+                try {
+                    sound.currentTime = 0;
+                } catch (error) {
+                    // Ignore seek errors.
+                }
+
+            }
+
+
+            if (
+                soundCancelTimers.get(sound) ===
+                cancelTimer
+            ) {
+                soundCancelTimers.delete(sound);
+            }
+
+        }, 700);
+
+
+    soundCancelTimers.set(
+        sound,
+        cancelTimer
+    );
 }
 
 function updateSoundToggle() {
@@ -1258,57 +1354,95 @@ function getCurrentRelease() {
 function setCoverImage(cover, release) {
 
     if (!release) {
+
         cover.removeAttribute("src");
         cover.alt = "";
         cover.style.visibility = "hidden";
+
         return;
     }
+
 
     const newSrc = release.image;
 
     cover.alt = release.title;
 
 
-    // If this exact image is already loaded,
-    // show it immediately.
+    /*
+       If the correct cover is already here,
+       do nothing.
+    */
     if (
         cover.getAttribute("src") === newSrc &&
         cover.complete &&
         cover.naturalWidth > 0
     ) {
+
         cover.style.visibility = "visible";
         return;
     }
 
 
-    // Do not leave the previous cover visible
-    // while the next one is still loading.
-    cover.style.visibility = "hidden";
+    /*
+       Load the new cover separately first.
+       The old image stays visible meanwhile,
+       so there is no blank flash.
+    */
+    const loader = new Image();
+
+    loader.decoding = "async";
+
+    cover.dataset.pendingSrc = newSrc;
+
+    loader.src = newSrc;
 
 
-    cover.onload = () => {
+    const applyNewCover = () => {
 
+        /*
+           Ignore an old load event if the user
+           has already moved to another cover.
+        */
         if (
-            cover.getAttribute("src") === newSrc
+            cover.dataset.pendingSrc !== newSrc
         ) {
-            cover.style.visibility = "visible";
+            return;
         }
 
+
+        cover.src = newSrc;
+        cover.style.visibility = "visible";
+
+        delete cover.dataset.pendingSrc;
     };
 
 
-    cover.onerror = () => {
+    /*
+       Cached image:
+       swap immediately.
+    */
+    if (
+        loader.complete &&
+        loader.naturalWidth > 0
+    ) {
 
-        if (
-            cover.getAttribute("src") === newSrc
-        ) {
-            cover.style.visibility = "hidden";
-        }
+        applyNewCover();
 
-    };
+    } else {
 
+        loader.onload = applyNewCover;
 
-    cover.src = newSrc;
+        loader.onerror = () => {
+
+            if (
+                cover.dataset.pendingSrc === newSrc
+            ) {
+                delete cover.dataset.pendingSrc;
+            }
+
+        };
+
+    }
 }
 
 function setCarouselArrowState(button, disabled) {
@@ -1423,6 +1557,7 @@ function renderMusicCarousel() {
 }
 
 function changeRelease(direction) {
+
     if (isMusicAnimating) return;
 
     const total = filteredMusicReleases.length;
@@ -1430,8 +1565,7 @@ function changeRelease(direction) {
     if (total <= 1) return;
 
 
-    // При двух релизах не переходим через край
-
+    // With two releases, do not move beyond the ends.
     if (total === 2) {
 
         if (
@@ -1447,6 +1581,7 @@ function changeRelease(direction) {
         ) {
             return;
         }
+
     }
 
 
@@ -1465,26 +1600,28 @@ function changeRelease(direction) {
             : prevCover;
 
 
-    coverStage.classList.add(animationClass);
+    let animationFinished = false;
+    let fallbackTimer = null;
 
 
-    function finishAnimation(event) {
+    function completeAnimation() {
 
-        // Ждём именно пока закончится движение,
-        // а не какое-то заранее установленное время
+        // Prevent transitionend + timeout
+        // from completing the same move twice.
+        if (animationFinished) return;
 
-        if (
-            event.target !== arrivingCover ||
-            event.propertyName !== "transform"
-        ) {
-            return;
-        }
+        animationFinished = true;
 
 
         arrivingCover.removeEventListener(
             "transitionend",
             finishAnimation
         );
+
+
+        if (fallbackTimer) {
+            clearTimeout(fallbackTimer);
+        }
 
 
         if (total === 2) {
@@ -1501,9 +1638,8 @@ function changeRelease(direction) {
         }
 
 
-        // Переставляем картинки мгновенно,
-        // пока transition временно отключён
-
+        // Rebuild the carousel instantly
+        // after the movement has finished.
         coverStage.classList.add("no-transition");
 
         coverStage.classList.remove(
@@ -1511,21 +1647,38 @@ function changeRelease(direction) {
             "is-moving-prev"
         );
 
+
         renderMusicCarousel();
 
 
-        // заставляем браузер применить новое состояние
-
+        // Force the browser to apply the new state.
         void coverStage.offsetWidth;
 
 
         requestAnimationFrame(() => {
 
-            coverStage.classList.remove("no-transition");
+            coverStage.classList.remove(
+                "no-transition"
+            );
 
             isMusicAnimating = false;
 
         });
+
+    }
+
+
+    function finishAnimation(event) {
+
+        if (
+            event.target !== arrivingCover ||
+            event.propertyName !== "transform"
+        ) {
+            return;
+        }
+
+
+        completeAnimation();
     }
 
 
@@ -1533,6 +1686,28 @@ function changeRelease(direction) {
         "transitionend",
         finishAnimation
     );
+
+
+    coverStage.classList.add(
+        animationClass
+    );
+
+
+    /*
+       Safari/iPhone fallback.
+
+       Normal case:
+       transitionend finishes the movement.
+
+       If the browser misses that event,
+       finish it automatically instead of
+       leaving the carousel permanently locked.
+    */
+    fallbackTimer =
+        setTimeout(
+            completeAnimation,
+            850
+        );
 }
 
 function applyMusicFilter(year) {
@@ -2651,6 +2826,24 @@ photoViewerImage.addEventListener(
 
         photoSwipeStartX = event.clientX;
         photoSwipeStartY = event.clientY;
+
+
+        /*
+           Keep receiving this finger gesture
+           even if the finger moves outside
+           the visible image.
+        */
+        if (photoViewerImage.setPointerCapture) {
+
+            try {
+                photoViewerImage.setPointerCapture(
+                    event.pointerId
+                );
+            } catch (error) {
+                // Ignore unsupported pointer capture.
+            }
+
+        }
     }
 );
 
