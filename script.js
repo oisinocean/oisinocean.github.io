@@ -2411,6 +2411,17 @@ const photoViewerCounter =
 
 
 
+const verticalPhotoFiles = new Set([
+    "brokentree.jpg",
+    "darktrees.jpg",
+    "house2.jpg",
+    "miniriver.jpg",
+    "nighttime.jpg",
+    "pine.jpg",
+    "sunlake.jpg",
+    "weirdtree.jpg"
+]);
+
 
 
 function createPhotoButton(fileName, photoList) {
@@ -2423,11 +2434,33 @@ function createPhotoButton(fileName, photoList) {
 
 
     const image =
-        document.createElement("img");
+    document.createElement("img");
 
-    image.loading = "lazy";
-    image.alt = "";
-    image.src = `images/photos/${fileName}`;
+image.loading = "lazy";
+image.decoding = "async";
+image.alt = "";
+
+
+/*
+   Tell the browser the photo proportions
+   before the image has finished loading.
+   This prevents the masonry layout from jumping.
+*/
+if (verticalPhotoFiles.has(fileName)) {
+
+    image.width = 536;
+    image.height = 800;
+
+} else {
+
+    image.width = 800;
+    image.height = 536;
+
+}
+
+
+image.src =
+    `images/photos/thumbs/${fileName}`;
 
 
     button.appendChild(image);
@@ -2474,7 +2507,7 @@ function buildAllPhotos() {
 }
 
 
-buildAllPhotos();
+
 
 
 let currentPhotoCollection = null;
@@ -2567,6 +2600,8 @@ function closePhotoCollection() {
 }
 
 
+let allPhotosBuilt = false;
+
 function switchPhotosView(view) {
 
     currentPhotoCollection = null;
@@ -2585,6 +2620,11 @@ function switchPhotosView(view) {
 
 
     if (view === "all") {
+
+        if (!allPhotosBuilt) {
+            buildAllPhotos();
+            allPhotosBuilt = true;
+        }
 
         photosCollections.style.display =
             "none";
