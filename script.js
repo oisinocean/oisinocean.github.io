@@ -608,6 +608,67 @@ if (canHover) {
 // ======================
 
 const musicReleases = [
+
+    {
+    id: "keepsake",
+
+    title: "Keepsake",
+    displayType: "single",
+    year: "2026",
+
+    artist: "Oisin Ocean",
+
+    image: "images/keepsake.jpg",
+
+    listenUrl: "",
+
+    listenLinks: {
+    spotify: "https://open.spotify.com/album/3QyU12iI2uXD3lMrQi4YHQ?si=M8ItBJ-lTIy5_sinbIBAXA",
+    youtube: "https://youtu.be/EXjHP7BjQN8?si=85igxRC4fzhXvkD1",
+    applemusic: "https://music.apple.com/us/song/keepsake/6798444958",
+    bandcamp: "https://oisinocean.bandcamp.com/track/keepsake"
+},
+
+    releaseDate: "September 4, 2026",
+
+    credits: `Music and lyrics by Oisin Ocean
+Performed by Oisin Ocean
+Recorded and produced by Oisin Ocean
+Mixed and mastered by Oisin Ocean
+Additional vocals by sphnee
+Artwork and design by Oisin Ocean`,
+
+    story: `i was originally working on a 2 song ep called Valmara, but in the end only this song was released.`,
+
+    lyrics: `everything is always the same,
+Wherever I go, nothing will change.
+the ones I met are no longer there,
+They’re fading away, I’m not gonna stay.
+I’ll try to find a place where I feel safe,
+No matter the cost, I know I’ll be okay.
+So why does life keep moving on and on,
+Where does it end, and where does it start?
+
+I gotta be there,
+some day.
+And thank you for
+being with me.
+
+I spent so many years just crying,
+holding on to what was dying,
+let it go, just let it go.
+The winds are getting warmer,
+We keep moving even further,
+Take me home, just take me home.
+I would do the same for you,
+I would even leave my body.
+Anything and everything.`,
+
+    relatedMaterial: []
+},
+
+
+
     {
     id: "allegory",
 
@@ -681,7 +742,12 @@ i still don't know.`,
 
     isReleased: false,
 
-    listenUrl: "",
+    listenLinks: {
+    spotify: "https://open.spotify.com/album/0C372bGtc5Ckr7L3OUKCUB?si=yb0FutR3S2yO6LiTMhJP_w",
+    youtube: "https://www.youtube.com/watch?v=UcqqmKBpLpE",
+    applemusic: "https://music.apple.com/us/song/kaos/6797264943",
+    bandcamp: "https://oisinocean.bandcamp.com/track/kaos"
+},
 
     releaseDate: "August 21, 2026",
 
