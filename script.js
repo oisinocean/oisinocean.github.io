@@ -669,6 +669,76 @@ Anything and everything.`,
 
 
 
+{
+    id: "comingback",
+
+    title: "Coming Back",
+    displayType: "single",
+    year: "2026",
+
+    artist: "Oisin Ocean",
+
+    image: "images/comingback.jpg",
+
+    listenUrl: "",
+
+    listenLinks: {
+    spotify: "https://open.spotify.com/album/5DF5iSCU293gnjLutfkUnT?si=LwwUs9C7TfCJABN5sazX-g",
+    youtube: "",
+    applemusic: "",
+    bandcamp: "https://oisinocean.bandcamp.com/track/coming-back"
+},
+
+    releaseDate: "Sep 25, 2026",
+
+    credits: `Music and lyrics by Oisin Ocean
+Performed by Oisin Ocean
+Recorded and produced by Oisin Ocean
+Mixed and mastered by Oisin Ocean
+Artwork and design by Oisin Ocean`,
+
+    story: "",
+
+    lyrics: `Silver, subtle,
+dying roots
+Piercing,
+but still giving back.
+A relentless motion.
+A beautiful destruction.
+
+I think you need to start with what you have.
+Archaic laws of a bygone era.
+She only cares what dress she will wear,
+And I will try to find what's hard to find.
+
+I'm coming back,
+I'm trynna (3x) understand.
+And every time, I'm falling (3x) to the past.
+I'm coming back, Oh love is fine, when it's fine.
+I see the sign, I'm trynna (2x) not lose my mind.
+
+Thousand miles,
+Broken bones,
+Back and forth,
+Let it unwind.
+
+Gloomy year,
+Don't say it loud,
+ropes and cans
+What makes you ask?
+
+When everything is calm, I fall apart,
+That's why you try to reach me every time.
+The sun is going down without a sound.
+The books upon the shelf are useless now.
+
+I'm trynna (2x) be alive again.`,
+
+    relatedMaterial: []
+},
+
+
+
     {
     id: "allegory",
 
