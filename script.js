@@ -699,10 +699,8 @@ Artwork and design by Oisin Ocean`,
 
     story: "",
 
-    lyrics: `Silver, subtle,
-dying roots
-Piercing,
-but still giving back.
+    lyrics: `Silver, subtle, dying roots
+Piercing, but still giving back.
 A relentless motion.
 A beautiful destruction.
 
