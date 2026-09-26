@@ -684,8 +684,8 @@ Anything and everything.`,
 
     listenLinks: {
     spotify: "https://open.spotify.com/album/5DF5iSCU293gnjLutfkUnT?si=LwwUs9C7TfCJABN5sazX-g",
-    youtube: "",
-    applemusic: "",
+    youtube: "https://youtu.be/ftFXNH-Gi1Q?si=14g7PUidSKDImeIe",
+    applemusic: "https://music.apple.com/us/song/coming-back/6801136934",
     bandcamp: "https://oisinocean.bandcamp.com/track/coming-back"
 },
 
@@ -732,7 +732,12 @@ The books upon the shelf are useless now.
 
 I'm trynna (2x) be alive again.`,
 
-    relatedMaterial: []
+    relatedMaterial: [
+    {
+        label: "Music video",
+        url: "https://youtu.be/ftFXNH-Gi1Q?si=14g7PUidSKDImeIe"
+    }
+]
 },
 
 
@@ -3326,8 +3331,23 @@ We had to stay till the end.`
 
         description:
             "Three posters made for the release of the five-track EP Everything Feels Awful If You Look at It Too Long. Versions with QR codes were printed and put up around the city."
-    }
+    },
     
+
+    {
+        id: "A-011",
+
+        type: "visual",
+
+        title: "Coming Back - Alternative Cover",
+
+        year: "2026",
+
+        file: "images/cobackcover2.png",
+
+        description:
+            "An alternative cover design for the single Coming Back."
+    }
 
 
 ];
